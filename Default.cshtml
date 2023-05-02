@@ -1,0 +1,140 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="~/Styles/IndexStyles.css">
+        <title>RUASA Bienes Raíces Querétaro</title>
+        <meta name="keywords" content="Bienes, Raíces, México, Querétaro, Casas, Casa, Renta, Venta, Departamento, Espacio, Comerciales, Terreno, Edificio, Colonia">
+    </head>
+    
+    <body>
+
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Header.cshtml")
+   
+        <!--BANNER SECTION-------------------------------------------------------------------------->
+        <div id="banner">
+            <div id="wrapper">
+                <div id="container">
+                    <img class="banner-img" src="Resources/Banner/2.png" alt="LANDING HOUSE"/>
+                </div>
+            </div>
+        </div>
+
+        <!--WELCOME SECTION------------------------------------------------------------------------->
+        <div>
+            <div>
+                <h1>BIENVENIDO A RUASA</h1>
+            </div>
+            <ul id="welcome">
+                <li>
+                    <a href="https://www.facebook.com/profile.php?id=1674543132825454&tsid=0.6625721063360597&source=typeahead">
+                        <img alt="facebook" src="Resources/General/facebook.png">
+                    </a>
+                    <!--<a href="~/Account/Register">
+                        <img alt="facebook" src="Resources/General/instagram.png">
+                    </a>
+                    <a href="~/Account/Register">
+                        <img alt="facebook" src="Resources/General/twitter.png">
+                    </a>
+                    <a href="~/Account/Register">
+                        <img alt="facebook" src="Resources/General/linkedin.png">
+                    </a>-->
+            </ul>  
+        </div>
+        <hr>
+        <div>
+            <h2 id="flashing-text">Bienes raíces y servicios de reubicación</h2>
+        </div>
+        <hr>
+        <!--INFORMATION SECTION--------------------------------------------------------------------->
+        <div class="ruasa-info-container">
+             <div id="info-left">
+                <p>"Ponemos a su disposición un trato profesional pero a la vez cálido, en donde
+                    la honestidad y la ética son ejes rectores"</p>
+            </div>
+
+            <div id="info-right">
+                <p>Más de dos décadas de presencia en Querétaro con una extensa y fuerte red
+                   de alianzas con otros agentes e inmobiliarias, disponibles para la ventaja
+                   de nuestros clientes.
+                   Ofrecemos opciones de propiedades en diferentes areas residenciales a lo largo
+                   de la ciudad de acuerdo a sus preferencias, gustos, presupuesto y necesidades.
+                   También lo acompañamos a lo largo del proceso de venta y asesoramos para que
+                   tenga completa seguridad en sus transacciones.
+                </p>
+            </div>        
+        </div>
+        <!--LOCATIONS SECTION----------------------------------------------------------------------->
+        
+        <div id="location-title">
+            <div>
+                <h1>NUESTRAS UBICACIONES</h1>
+            </div>
+        </div>
+        <!--TEST TEST TEST TEST TEST TEST-------------------------------------------------------TEST-->
+        <div>
+            <ul class="photo-grid">
+	            <li>
+		            <a href="~/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Vista+Real&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/VR.jpg" alt="Vista Real">
+				            <figcaption><p>Vista Real</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+	            <li>
+		            <a href="~/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Condado&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/Condado.jpg" alt="Condado">
+				            <figcaption><p>Condado</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+	            <li>
+		            <a href="/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Colinas+del+Bosque&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/Colinas.jpg" alt="Colinas del Bosque">
+				            <figcaption><p>Colinas del Bosque</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+                <li>
+		            <a href="~/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Real+del+Bosque&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/Real_del_Bosque.jpg" alt="Real del Bosque">
+				            <figcaption><p>Real del Bosque</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+                <li>
+		            <a href="~/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Milenio+III&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/Condado.jpg" alt="Milenio III">
+				            <figcaption><p>Milenio III</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+                <li>
+		            <a href="~/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Juriquilla&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/Juriquilla.jpg" alt="Juriquilla">
+				            <figcaption><p>Juriquilla</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+            </ul>
+        </div>
+        <hr>
+        <!--CONTACT BUTTON SECTION------------------------------------------------------------------>
+        <div id="Greeting">
+            <h1>¿Buscando rentar, vender, comprar o reubicarse?</h1>
+            <h1>Déjenos conocer su propiedad y platicar sobre sus opciones</h1>
+            <a class="button-contact" type="button" href="~/Contact_2.cshtml"><span>Contáctenos</span></a>
+        </div>
+        <!--FOOTER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Footer.cshtml")
+    </body>
+</html>

@@ -1,0 +1,294 @@
+﻿@{
+    Validation.RequireField("Modo", "El modo es requerido.");
+    Validation.RequireField("Tipo", "El tipo es requerido.");
+    Validation.RequireField("Area", "La Colonia es requerida.");
+    Validation.RequireField("Street", "La Calle es requerida.");
+    Validation.RequireField("Number", "El número es requerido.");
+    Validation.RequireField("Price", "El precio es requerido.");
+    Validation.RequireField("Landm2", "Los metros de terreno son requeridos.");
+    
+    //INITIALIZE VARIABLES
+    var Modus = "";
+    var Tipo = "";
+    var Area = "";
+    var Street = "";
+    var Number = 0;
+    var Price = Decimal.Zero;
+    int? Builtm2 = null;
+    var Landm2 = 0;
+    int? Room = null;
+    int? CompleteBathroom = null;
+    int? HalfBathroom = null;
+    int? TVRoom = null;
+    int? Kitchen = null;
+    int? StudyRoom = null;
+    int? ServiceRoom = null;
+    int? Garage = null;
+    int? Garden = null;
+    int? Levels = null;
+    int? Age = null;
+    var Observations = "";
+    float? Commission = null;
+    var LandUse = "";
+    var Description = "";
+    bool? Promoted = null;
+    bool? Publish = null;
+    var updateQueryString ="";
+    var db = Database.Open("RUASA");
+    var PropertyId  = UrlData[0];
+
+
+    //CHECK ARGUMENT, IF EMPTY RETURN TO PROPERTY ADMIN
+    if (PropertyId.IsEmpty()) {
+         Response.Redirect("~/Members/PropertyAdmin.cshtml");
+    }
+    
+    // IF POST IS VALID THEN READ VARIABLES
+    if (IsPost && Validation.IsValid()) {        
+
+        Area = Request["Area"];
+        Street = Request["Street"];
+        Number = Request["Number"].AsInt();
+        Price = Request["Price"].AsDecimal();
+        Builtm2 = Request["Builtm2"].AsInt();
+        Landm2 = Request["Landm2"].AsInt();  
+        Room = Request["Room"].AsInt();
+        CompleteBathroom = Request["CompleteBathroom"].AsInt();
+        HalfBathroom = Request["HalfBathroom"].AsInt();
+        TVRoom = Request["TVRoom"].AsInt();
+        Kitchen = Request["Kitchen"].AsInt();
+        StudyRoom = Request["StudyRoom"].AsInt();
+        ServiceRoom = Request["ServiceRoom"].AsInt();
+        Garage = Request["Garage"].AsInt();
+        Garden = Request["Garden"].AsInt();
+        Levels = Request["Levels"].AsInt();
+        Age = Request["Age"].AsInt();
+        Observations = Request["Observations"];
+        Commission = Request["Commission"].AsFloat();
+        LandUse = Request["LandUse"];
+        Tipo = Request["Tipo"];
+        Modus = Request["Modo"];
+        Description = Request["Description"];
+        //Promoted = Request["Promoted"].AsBool();
+        //Publish = Request["Publish"].AsBool();
+
+        var cbCheck=Request.Form["Publish"];
+        if (cbCheck=="on"){
+            Publish = true;
+        } else {
+            Publish = false;
+        }
+        cbCheck=Request.Form["Promoted"];
+        if (cbCheck=="on") {
+            Promoted = true;
+        } else {
+            Promoted = false;
+        }
+
+        updateQueryString =
+            "UPDATE Properties SET Area=@0, Street=@1, Number=@2, Price=@3," +
+            "Builtm2=@4, Landm2=@5, Room=@6, CompleteBathroom=@7," +
+            "HalfBathroom=@8, TVRoom=@9, Kitchen=@10, StudyRoom=@11," +
+            "ServiceRoom=@12, Garage=@13, Garden=@14, Levels=@15," +
+            "Age=@16, Observations=@17, Commission=@18, LandUse=@19," +
+            "Tipo=@20, Modo=@21, Description=@22, Promoted=@23, Publish=@24 WHERE Id=@25";
+
+        db.Execute(updateQueryString, Area, Street, Number, Price, 
+                Builtm2, Landm2, Room, CompleteBathroom, 
+                HalfBathroom,TVRoom, Kitchen, StudyRoom, 
+                ServiceRoom, Garage, Garden, Levels, 
+                Age, Observations, Commission, LandUse,
+                Tipo, Modus, Description, Promoted, Publish, PropertyId);
+
+        // RETURN TO PROPERTY ADMIN
+        Response.Redirect(@Href("~/Members/PropertyAdmin"));
+
+        // DEBUG START
+        //var dataFilePath = "~/Resources/dataFile.txt";
+        //var physicalPath = Server.MapPath(dataFilePath);
+        //var physicalPath = HttpContext.Current.Server.MapPath(dataFilePath);
+        //File.WriteAllText(physicalPath, updateQueryString);
+        // DEBUG END
+    }
+    else {
+        var selectQueryString = "SELECT * FROM Properties WHERE Id=@0";
+
+        var row = db.QuerySingle(selectQueryString, PropertyId);
+        Area = row.Area;
+        Street = row.Street;
+        Number = row.Number;
+        Price = row.Price;
+        Builtm2 = row.Builtm2;
+        Landm2 = row.Landm2;
+        Room = row.Room;
+        CompleteBathroom = row.CompleteBathroom;
+        HalfBathroom = row.HalfBathroom;
+        TVRoom = row.TVRoom;
+        Kitchen = row.Kitchen;
+        StudyRoom = row.StudyRoom;
+        ServiceRoom = row.ServiceRoom;
+        Garage = row.Garage;
+        Garden = row.Garden;
+        Levels = row.Levels;
+        Age = row.Age;
+        Observations = row.Observations;
+        Commission = Convert.ToSingle(row.Commission);
+        LandUse = row.LandUse;
+        Tipo = row.Tipo;
+        Modus = row.Modo;
+        Description = row.Description;
+        Promoted = row.Promoted;
+        Publish = row.Publish;
+    }
+
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>RUASA - Actualizar Propiedades</title>
+      <style type="text/css">
+         label { float: left; width: 8em; text-align: right;
+                 margin-right: 0.5em;}
+         fieldset { padding: 1em; border: 1px solid; width: 35em;}
+         legend { padding: 2px 4px;  border: 1px solid; font-weight: bold;}
+         .validation-summary-errors {font-weight:bold; color:red; font-size:11pt;}
+      </style>
+      <link rel="stylesheet" type="text/css" href="~/Styles/UpdatePropertiesStyles.css">
+    </head>
+    <body>
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Members/HeaderAdmin.cshtml")          
+        <div id="form">
+            <div id="wrapper">
+                <div id="container">        
+                    @Html.ValidationSummary("Errores en el guardado:")
+                    <form method="post" action="">
+                        <fieldset>
+                        <legend>Actualizar Información</legend>
+                        <div>
+                            <label>Modo:</label>
+                            <input name="Modo" type="text" value="@Modus" />
+                        </div>
+                        <div>
+                            <label>Tipo:</label>
+                            <input name="Tipo" type="text" value="@Tipo" />
+                        </div>
+                        <div>
+                            <label>Colonia:</label>
+                            <input name="Area" type="text" value="@Area" />
+                        </div>
+                        <div>
+                            <label>Calle:</label>
+                            <input name="Street" type="text" value="@Street" />
+                            Exclusivo RUASA 
+                        </div>
+                        <div>
+                            <label>Número:</label>
+                            <input name="Number" type="text" value="@Number" />
+                            Exclusivo RUASA
+                        </div>
+                        <div>
+                            <label>Precio:</label>
+                            <input name="Price" type="text" value="@Price" />
+                        </div>
+                        <div>
+                            <label>M2 Construcción:</label>
+                            <input name="Builtm2" type="text" value="@Builtm2" />
+                        </div>
+                        <div>
+                            <label>M2 Terreno:</label>
+                            <input name="Landm2" type="text" value="@Landm2" />
+                        </div>
+                        <div>
+                            <label>Recámaras:</label>
+                            <input name="Room" type="text" value="@Room" />
+                        </div>
+                        <div>
+                            <label>Baños Completos:</label>
+                            <input name="CompleteBathroom" type="text" value="@CompleteBathroom" />
+                        </div>
+                        <div>
+                            <label>Medios Baños:</label>
+                            <input name="HalfBathroom" type="text" value="@HalfBathroom" />
+                        </div>
+                        <div>
+                            <label>Cuarto de TV:</label>
+                            <input name="TVRoom" type="text" value="@TVRoom" />
+                        </div>
+                        <div>
+                            <label>Cocina Equipada:</label>
+                            <input name="Kitchen" type="text" value="@Kitchen" />
+                        </div>
+                        <div>
+                            <label>Estudio:</label>
+                            <input name="StudyRoom" type="text" value="@StudyRoom" />
+                        </div>
+                        <div>
+                            <label>Cuarto de Servicio:</label>
+                            <input name="ServiceRoom" type="text" value="@ServiceRoom" />
+                        </div>
+                        <div>
+                            <label># Autos Garage:</label>
+                            <input name="Garage" type="text" value="@Garage" />
+                        </div>
+                        <div>
+                            <label>Jardín:</label>
+                            <input name="Garden" type="text" value="@Garden" />
+                        </div>
+                        <div>
+                            <label>Niveles:</label>
+                            <input name="Levels" type="text" value="@Levels" />
+                        </div>
+                        <div>
+                            <label>Antigüedad:</label>
+                            <input name="Age" type="text" value="@Age" />
+                        </div>
+                        <div>
+                            <label>Observaciones:</label>
+                            <input name="Observations" type="text" value="@Observations" size="500" style="width: 60%"/>
+                            Exclusivo RUASA
+                        </div>
+                        <div>
+                            <label>Comisión:</label>
+                            <input name="Commission" type="text" value="@Commission" />
+                            Exclusivo RUASA
+                        </div>
+                        <div>
+                            <label>Uso de Suelo:</label>
+                            <input name="LandUse" type="text" value="@LandUse" />
+                        </div>
+                        <div>
+                            <label>Descripción:</label>
+                            <input name="Description" type="text" size="500" value="@Description" style="width: 60%" />
+                        </div>
+                        <div>
+                            <label>Promovida:</label>
+                            @if(@Promoted==true) {
+                                <input name="Promoted" type="checkbox"  checked />  
+                            } else {
+                                <input name="Promoted" type="checkbox"  />
+                            }
+                            
+                        </div>
+                        <div>
+                            <label>Publicar:</label>
+ 
+                            @if(@Publish==true) {
+                                <input name="Publish" type="checkbox"  checked/>  
+                            } else {
+                                <input name="Publish" type="checkbox" />  
+                            }
+                            
+                        </div>
+                        <div>
+                            <label>&nbsp;</label>
+                            <input type="submit" value="Guardar" class="submit" />
+                        </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

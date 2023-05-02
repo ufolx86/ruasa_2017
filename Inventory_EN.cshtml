@@ -1,0 +1,250 @@
+﻿@{
+    float Bathrooms =0;
+    string myquery = "";
+    string url ="";
+    string modeSelected ="";
+    string tipoSelected ="";
+    string areaSelected = "";
+    string orderSelected = "";
+    string orderParticle ="";
+    string test ="";
+    string typeTempVar ="";
+    string modeTempVar ="";
+    string landUseTempVar="";
+    var areaQueryString = "SELECT DISTINCT Area FROM Properties ORDER BY Area ASC";
+    var selectQueryString ="";
+    var picData = "";
+    List<string> photoNames = new List<string>();
+    var folderPath="";
+    var db = Database.Open("RUASA");
+
+    try { 
+        url = HttpContext.Current.Request.Url.AbsoluteUri;
+        var uri = new Uri(url);
+        var urlParsed = HttpUtility.ParseQueryString(uri.Query);
+        
+
+        //TRANSLATE LANGUAGE
+        //modeSelected = urlParsed["cb-mode"];
+        if(urlParsed["cb-mode"]=="All"){
+            modeSelected = "Todas";
+        } else if (urlParsed["cb-mode"]=="Lease"){
+            modeSelected = "Renta";
+        } else if (urlParsed["cb-mode"]=="Sale"){
+            modeSelected = "Venta";
+        }
+
+        //tipoSelected = urlParsed["cb-tipo"];
+        if(urlParsed["cb-tipo"]=="All"){
+            tipoSelected = "Todas";
+        } else if (urlParsed["cb-tipo"]=="House"){
+            tipoSelected = "Casa";
+        } else if (urlParsed["cb-tipo"]=="Land"){
+            tipoSelected = "Terreno";
+        } else if (urlParsed["cb-tipo"]=="Warehouse"){
+            tipoSelected = "Bodega";
+        } else if (urlParsed["cb-tipo"]=="Retail"){
+            tipoSelected = "Local";
+        }
+        
+        areaSelected = urlParsed["cb-area"]; 
+
+        //orderSelected = urlParsed["cb-order"];
+        if(urlParsed["cb-order"]=="Select"){
+            orderSelected = "Elegir";
+        } else if (urlParsed["cb-order"]=="Ascending Price"){
+            orderSelected = "Precio menor a mayor";
+        } else if (urlParsed["cb-order"]=="Descending Price"){
+            orderSelected = "Precio mayor a menor";
+        }
+
+        if (orderSelected== "" || orderSelected==null || orderSelected=="Elegir" || orderSelected=="Precio menor a mayor") {
+            orderParticle = "ASC";
+        } else {
+            orderParticle = "DESC";
+        }
+         
+        if (modeSelected == "" || modeSelected ==null || areaSelected=="" || areaSelected==null || orderSelected == "" || orderSelected == null) {
+            selectQueryString = "SELECT * FROM Properties WHERE Publish = 1 AND Promoted = 1 ORDER BY AGE";
+        } else if (modeSelected!="Todas" && areaSelected=="Todas") {
+            if(tipoSelected=="Todas"){
+                selectQueryString = "SELECT * FROM Properties WHERE Publish = 1 AND MODO = '" + modeSelected + "' ORDER BY Price " + orderParticle;
+            } else {
+                selectQueryString = "SELECT * FROM Properties WHERE Publish = 1 AND TIPO = '" + tipoSelected + "' AND MODO = '" + modeSelected + "' ORDER BY Price " + orderParticle;
+            }            
+        } else if (modeSelected=="Todas" && areaSelected!="Todas") {
+            if (tipoSelected=="Todas") {
+                selectQueryString = "SELECT * FROM Properties WHERE Publish = 1 AND Area = '" + areaSelected + "' ORDER BY Price " + orderParticle;
+            } else {
+                selectQueryString = "SELECT * FROM Properties WHERE Publish = 1 AND TIPO = '" + tipoSelected + "' AND Area = '" + areaSelected + "' ORDER BY Price " + orderParticle;
+            }            
+        } else if (modeSelected=="Todas" || areaSelected=="Todas") {
+            if (tipoSelected=="Todas") {
+                selectQueryString = "SELECT * FROM Properties WHERE Publish = 1 ORDER BY Price " + orderParticle;
+            } else {
+                selectQueryString = "SELECT * FROM Properties WHERE Publish = 1 AND TIPO = '" + tipoSelected + "' ORDER BY Price " + orderParticle;
+            }            
+        } else if (modeSelected!="Todas" && areaSelected!="Todas") {
+            if (tipoSelected=="Todas") {
+                selectQueryString = "SELECT * FROM Properties WHERE Publish = 1 AND Area = '" + areaSelected + "' AND MODO = '" + modeSelected + "' ORDER BY Price " + orderParticle;   
+            } else {
+                selectQueryString = "SELECT * FROM Properties WHERE Publish = 1 AND TIPO = '" + tipoSelected + "' AND Area = '" + areaSelected + "' AND MODO = '" + modeSelected + "' ORDER BY Price " + orderParticle;   
+            }
+           
+        } else {
+            selectQueryString = "SELECT * FROM Properties WHERE Publish = 1 AND Promoted = 1 ORDER BY Price " + orderParticle;
+        }
+    } catch {
+        selectQueryString = "SELECT * FROM Properties WHERE Publish = 1 AND Promoted = 1 ORDER BY Price";
+    }
+
+
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RUASA - Inventory</title>
+        <link rel="stylesheet" type="text/css" href="Styles/InventoryStyles.css">
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Header_EN.cshtml")
+
+        <!--SEARCH SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/SearchBar_EN.cshtml")
+        <div id="inventory">
+            <div id="wrapper">
+                <div id="container">
+                    <!--PROPERTY RESULTS SECTION------------------------------------------------------------------>
+                    <ul class="property-grid">
+                        @foreach(var row in db.Query(selectQueryString)){
+                            <li>
+                                <div class="property-title">
+                                    @if(@row.Tipo=="Terreno"){
+                                        typeTempVar = "Land";
+                                    } else if (@row.Tipo=="Casa") {
+                                         typeTempVar = "House";
+                                    } else if (@row.Tipo=="Bodega") {
+                                         typeTempVar = "Warehouse";
+                                    } else if (@row.Tipo=="Local") {
+                                         typeTempVar = "Retail space";
+                                    }
+
+                                    @if(@row.Modo=="Venta"){
+                                        modeTempVar = "Sale";
+                                    } else if (@row.Modo=="Renta") {
+                                        modeTempVar = "Lease";
+                                    } 
+                                    @typeTempVar on @modeTempVar 
+                                </div>
+                                <div class="property-image">
+                                    @{
+                                        try {
+                                            folderPath = HttpContext.Current.Server.MapPath("~/Resources/" + @row.Id);
+                                            foreach (string file in Directory.GetFiles(folderPath)) {
+                                                picData = Path.GetFileNameWithoutExtension(file);
+                                                photoNames.Add(picData);
+                                            }
+                                            folderPath = "~/Resources/" + @row.Id;
+                                            <img src="@Href(@folderPath + "/1.jpg")" alt="IMAGE NOT AVAILABLE"></img>
+                                        } catch {
+                                            folderPath = "~/Resources/Default";
+                                            <img src="@Href(@folderPath + "/1.jpg")" alt="N/A"></img>
+                                        } 
+                                    }  
+                                                                        
+                                </div>
+                                <div class="property-upper-container">                    
+                                    <div class="property-info-left">
+                                        <div class="property-area">
+                                            @row.Area
+                                        </div>
+                                        <div class="property-price">
+                                            @{
+                                                decimal decMoneyValue = @row.Price;
+                                                string moneyValue = String.Format("{0:C}", decMoneyValue);
+                                            }
+                                            @moneyValue
+                                        </div>    
+                                    </div>
+                                    <div class="property-info-right"> 
+                                        <input class="button-detalles" type="button" value="Details" onclick="location.href ='PropertyDetail_EN/@row.Id'" />
+                                        <!--<form class="button-detalles" name="" action="~/PropertyDetail" method="post">
+                                            <a href="~/PropertyDetail.cshtml">Detalles</a>
+                                        </form>
+                                        <div>
+                                            <a class="button-detalles" type="button" href="~/PropertyDetail.cshtml"><span>Detalles</span></a>
+                                        </div>-->
+                                    </div>  
+                                </div>
+                                <div class="property-lower-container">
+                                    @if(@row.Tipo=="Terreno") {
+                                        <table class="property-table">
+                                            <tr class="table-first-row">
+                                                <td>L: @row.Landm2  m2</td>
+                                                <td>
+
+                                                </td>                                    
+                                                <td>
+                             
+                                                </td>
+                                            </tr>
+                                            <tr class="table-second-row">
+                                                @if(@row.LandUse=="Comercial"){
+                                                    landUseTempVar = "Commercial";
+                                                } else if(@row.LandUse=="Habitacional"){
+                                                    landUseTempVar = "Residential";
+                                                } else if(@row.LandUse=="Mixto"){
+                                                    landUseTempVar = "Mixed";
+                                                }
+                                                <td>@landUseTempVar</td>
+                                                <td>
+
+                                                </td>
+                                                <td>
+
+                                                </td>
+                                            </tr>
+                                        </table>                            
+                                    } else {
+                                        <table class="property-table">
+                                            <tr class="table-first-row">
+                                                <td>L: @row.Landm2  m2</td>
+                                                <td>
+                                                    @row.Room
+                                                    <img src="~/Resources/Description/Room.png" alt="n/a"></img>
+                                                </td>                                    
+                                                <td>
+                                                    @{
+                                                        Bathrooms = row.CompleteBathroom + row.HalfBathroom; 
+                                                    }   
+                                                    @Bathrooms     
+                                                    <img src="~/Resources/Description/Bath.png" alt="n/a"></img>                             
+                                                </td>
+                                            </tr>
+                                            <tr class="table-second-row">
+                                                <td>B: @row.Builtm2  m2</td>
+                                                <td>
+                                                    @row.Garage
+                                                    <img src="~/Resources/Description/Garage.png" alt="n/a"></img>
+                                                </td>
+                                                <td>
+                                                    @row.Levels
+                                                    <img src="~/Resources/Description/Levels.png" alt="n/a"></img>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    }
+                                </div>                                        
+                            </li>
+                        }
+                    </ul>    
+                </div>
+            </div>
+        </div>                      
+        <!--FOOTER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Footer.cshtml")        
+    </body>
+</html>

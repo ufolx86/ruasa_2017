@@ -1,0 +1,47 @@
+﻿@{
+    if (!WebSecurity.IsAuthenticated) {
+        Response.Redirect("~/Account/Login?returnUrl="
+            + Request.Url.LocalPath);
+    }    
+    var db = Database.Open("Ruasa");
+    var ProductId = UrlData[0];
+    if (ProductId.IsEmpty()) {
+        Response.Redirect("~/PropertyAdmin");
+    }
+    var prod = db.QuerySingle("SELECT * FROM Properties WHERE ID = @0", ProductId);
+    if( IsPost && !ProductId.IsEmpty()) {
+        var deleteQueryString = "DELETE FROM Properties WHERE Id=@0";
+        db.Execute(deleteQueryString, ProductId);
+        Response.Redirect("~/PropertyAdmin");
+    }
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RUASA - Borrar Propiedades</title>
+        <link rel="stylesheet" type="text/css" href="~/Styles/DeletePropertiesStyle.css">
+    </head>
+    <body>
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Members/HeaderAdmin.cshtml")
+        <div id="form">
+            <div id="wrapper">
+                <div id="container">
+                    <form method="post" action="" name="form">
+                        <p>¿Estás seguro de querer borrar esta propiedad?</p>
+
+                        <p>Modo: @prod.Modo <br />
+                            Tipo: @prod.Tipo <br />
+                            Colonia: @prod.Area <br />
+                            Calle: @prod.Street <br />
+                            Número: @prod.Number <br />
+                            Precio: @prod.Price <br />
+                            Observaciones: @prod.Observations</p>
+                        <p><input type="submit" value="Delete" /></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

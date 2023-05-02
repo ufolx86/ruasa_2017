@@ -1,0 +1,70 @@
+﻿@{
+    var contactMail = "contacto@ruasabienesraicesqro.com";
+    var customerName = Request["name"];
+    var customerEmail = Request["email"]; 
+    var customerRequest = Request["request"];
+    var with = "with";
+    var errorMessage = "";
+
+    // use a try catch block and send the email
+    try {
+        // Initialize WebMail helper
+        WebMail.SmtpServer = "smtpout.secureserver.net";
+        WebMail.SmtpPort = 25;
+        WebMail.UserName = "contacto@ruasabienesraicesqro.com";
+        WebMail.Password = "&";
+        WebMail.From = customerEmail;
+        WebMail.EnableSsl = false;
+
+         // Send email
+        WebMail.Send(to: customerEmail,
+            subject: "Solicitud de " + customerName,
+            body: customerName + "con correo electrónico:" + customerEmail + "tiene la siguiente consulta:" + customerRequest
+        );
+
+        //CODE WITH ATTACHMENTS
+
+        // Create array containing file name
+        //var filesList = new string [] { fileAttachment };
+
+        // Attach file and send email
+        //if(fileAttachment == null || fileAttachment.IsEmpty()) {
+        //    WebMail.Send(to: customerEmail,
+        //    subject: subjectLine,
+        //    body: "From: " + customerName + "\n\nHis message: " + message);
+        //    with = "without";
+        //} else {
+        //    WebMail.Send(to: customerEmail,
+        //    subject: subjectLine,
+        //    body: "From: " + customerName + "\n\nHis message: " + message,
+        //    filesToAttach: filesList);
+        //}
+
+    }
+    catch (Exception ex ) {
+        errorMessage = ex.Message;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Request for Assistance</title>
+</head>
+<body>
+  <p>Lamentamos que estés teniendo este error, <b>@customerName</b>.</p>
+    @if(errorMessage == "")
+    {
+        <p><b>@customerName</b>, thank you for your interest.</p>
+        //<p>An email message has been sent to our customer service
+        //   department <b>@with</b> the <b>@fileAttachment</b> file attached.</p>
+    }
+    else
+    {
+        <p><b>El correo <em>no</em> ha sido enviado.</b></p>
+        <p>Favor de utilizar otro medio de comunicación.    
+        </p>
+        <p>The following error was reported:</p>
+        <p><em>@errorMessage</em></p>
+    }
+</body>
+</html>

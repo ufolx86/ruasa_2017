@@ -1,0 +1,96 @@
+﻿@{
+  var db = Database.Open("RUASA");
+  var selectQueryString = "SELECT * FROM Properties ORDER BY Modo";
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Borrar Propiedad</title>
+        <style>
+            table, th, td {
+              border: solid 1px #bbbbbb;
+              border-collapse: collapse;
+              padding: 2px;
+            }
+         </style>
+        <link rel="stylesheet" type="text/css" href="Styles/NavBar.css">
+    </head>
+    <body>
+        <h1>Propiedades RUASA</h1>
+        <div class="menu">
+                <ul id="menu-list">
+                    <li><a href="@Href("~/index")">Salir</a></li>
+                    <li><a class="active" href="@Href("~/DeleteProperties")">Borrar Propiedades</a></li>
+                    <li><a href="@Href("~/InsertProperties")">Añadir Propiedades</a></li>                
+                    <li><a href="@Href("~/EditProperties")">Editar Propiedades</a></li>
+                    <li><a href="@Href("~/Administrador")">Listado de Propiedades</a></li>                
+                </ul>
+        </div> 
+
+        <form method="post" action="" name="form">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Id</th>
+                        <th>Modo</th>
+                        <th>Tipo</th>
+                        <th>Colonia</th>
+                        <th>Calle</th>
+                        <th>Número</th>
+                        <th>Precio</th>
+                        <th>M2 Construcción</th>
+                        <th>M2 Terreno</th>
+                        <th>Recámaras</th>
+                        <th>Baños Completos</th>
+                        <th>Medios Baños</th>
+                        <th>Cuarto TV</th>
+                        <th>Cocina Equipada</th>
+                        <th>Estudio</th>
+                        <th>Cuarto de Servicio</th>
+                        <th># Autos Garage</th>
+                        <th>Jardín</th>
+                        <th>Niveles</th>
+                        <th>Antigüedad</th>
+                        <th>Observaciones</th>
+                        <th>Comisión</th>
+                        <th>Uso de Suelo</th>
+                        <th>Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in db.Query(selectQueryString)) {
+                    <tr>
+                        <td><a href="@Href("~/DeleteProperties", row.Id)">Borrar</a></td>
+                        <td>@row.Id</td>
+                        <td>@row.Modo</td> <!--Cell in a Table-->
+                        <td>@row.Tipo</td>
+                        <td>@row.Area</td>
+                        <td>@row.Street</td>
+                        <td>@row.Number</td>
+                        <td>@row.Price</td>
+                        <td>@row.Builtm2</td>
+                        <td>@row.Landm2</td>
+                        <td>@row.Room</td>
+                        <td>@row.CompleteBathroom</td>
+                        <td>@row.HalfBathroom</td>
+                        <td>@row.TVRoom</td>
+                        <td>@row.Kitchen</td>
+                        <td>@row.StudyRoom</td>
+                        <td>@row.ServiceRoom</td>
+                        <td>@row.Garage</td>
+                        <td>@row.Garden</td>
+                        <td>@row.Levels</td>
+                        <td>@row.Age</td>
+                        <td>@row.Observations</td>
+                        <td>@row.Commission</td>
+                        <td>@row.LandUse</td>
+                        <td>@row.Description</td>
+                        <td><img src="Resources/@row.Id/1.jpg" alt="n/a" height=100 width=100></img></td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+    </body>
+</html>

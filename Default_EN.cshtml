@@ -1,0 +1,141 @@
+﻿@{
+    
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="~/Styles/IndexStyles.css">
+        <title>RUASA Real Estate Querétaro</title>
+        <meta name="keywords" content="Real, Estate, Mexico, Queretaro, House, Rent, Buy, Lease, Appartment, Space, Commercial, Land, Building">
+    </head>
+    
+    <body>
+
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Header_EN.cshtml")
+   
+        <!--BANNER SECTION-------------------------------------------------------------------------->
+        <div id="banner">
+            <div id="wrapper">
+                <div id="container">
+                    <img class="banner-img" src="Resources/Banner/2.png" alt="LANDING HOUSE"/>
+                </div>
+            </div>
+        </div>
+
+        <!--WELCOME SECTION------------------------------------------------------------------------->
+        <div>
+            <div>
+                <h1>WELCOME TO RUASA</h1>
+            </div>
+            <ul id="welcome">
+                <li>
+                    <a href="https://www.facebook.com/profile.php?id=1674543132825454&tsid=0.6625721063360597&source=typeahead">
+                        <img alt="facebook" src="Resources/General/facebook.png">
+                    </a>
+                    <!--<a href="~/Account/Register">
+                        <img alt="facebook" src="Resources/General/instagram.png">
+                    </a>
+                    <a href="~/Account/Register">
+                        <img alt="facebook" src="Resources/General/twitter.png">
+                    </a>
+                    <a href="~/Account/Register">
+                        <img alt="facebook" src="Resources/General/linkedin.png">
+                    </a>-->
+            </ul>  
+        </div>
+        <hr>
+        <div>
+            <h2 id="flashing-text">Real estate and relocation services</h2>
+        </div>
+        <hr>
+        <!--INFORMATION SECTION--------------------------------------------------------------------->
+        <div class="ruasa-info-container">
+             <div id="info-left">
+                <p>"We offer you a completely proffesional and at the same time friendly relationship,
+                    in which honesty and ethics are our guiding principles"</p>
+            </div>
+
+            <div id="info-right">
+                <p>Over two decades of presence in the state of Queretaro, with a wide and strong
+                   network of other brokers and agencies, available to the advantage of our customers.
+                   We offer plenty of real estate options in several residential areas throughout the 
+                   city, according to your preferences, likes, budget and needs.
+                   We also accompany you through the sales process, and advise you for your complete
+                   peace of mind in all your transactions.</p>
+            </div>        
+        </div>
+        <!--LOCATIONS SECTION----------------------------------------------------------------------->
+        
+        <div id="location-title">
+            <div>
+                <h1>OUR LOCATIONS</h1>
+            </div>
+        </div>
+        <!--TEST TEST TEST TEST TEST TEST-------------------------------------------------------TEST-->
+        <div>
+            <ul class="photo-grid">
+	            <li>
+		            <a href="~/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Vista+Real&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/VR.jpg" alt="Vista Real">
+				            <figcaption><p>Vista Real</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+	            <li>
+		            <a href="~/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Condado&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/Condado.jpg" alt="Condado">
+				            <figcaption><p>Condado</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+	            <li>
+		            <a href="/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Colinas+del+Bosque&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/Colinas.jpg" alt="Colinas del Bosque">
+				            <figcaption><p>Colinas del Bosque</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+                <li>
+		            <a href="~/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Real+del+Bosque&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/Real_del_Bosque.jpg" alt="Real del Bosque">
+				            <figcaption><p>Real del Bosque</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+                <li>
+		            <a href="~/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Milenio+III&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/Condado.jpg" alt="Milenio III">
+				            <figcaption><p>Milenio III</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+                <li>
+		            <a href="~/Inventory?cb-mode=Todas&cb-tipo=Todas&cb-area=Juriquilla&cb-order=Elegir">
+			            <figure>
+				            <img src="Resources/Landing-Examples/Juriquilla.jpg" alt="Juriquilla">
+				            <figcaption><p>Juriquilla</p></figcaption>
+			            </figure>
+		            </a>
+	            </li>
+            </ul>
+        </div>
+        <hr>
+        <!--CONTACT BUTTON SECTION------------------------------------------------------------------>
+        <div id="Greeting">
+            <h1>Looking to rent, sell, purchase or relocate?</h1>
+            <h1>Let us become acquainted with your property and talk about your options</h1>
+            <a class="button-contact" type="button" href="~/Contact_2_EN.cshtml"><span>Contact us</span></a>
+        </div>
+        <!--FOOTER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Footer.cshtml")
+    </body>
+</html>

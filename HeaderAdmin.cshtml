@@ -1,0 +1,32 @@
+﻿@{
+    
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="~/Styles/HeaderAdmin.css">
+        <title></title>
+    </head>
+    <body>
+       <!--HEADER SECTION-------------------------------------------------------------------------->
+        <header>
+            <div class="header-admin-wrapper">
+                <div class="float-right-admin">                
+                    <!--NAV SECTION-------------------------------------------------------------------------->
+                    <nav>
+                        <ul id="lower-left-section-admin">
+                            <li><a class="active" href="@Href("~/index")">Salir</a></li>
+                            <li><a href="@Href("~/DeleteProperties")">Borrar Propiedades</a></li>
+                            <li><a href="@Href("~/InsertProperties")">Añadir Propiedades</a></li> 
+                            <li><a href="@Href("~/EditProperties")">Editar Propiedades</a></li>
+                            <li><a href="@Href("~/Administrador")">Listado de Propiedades</a></li>                                                         
+                        </ul>
+                    </nav>
+                </div>         
+            </div>
+        </header>         
+    </body>
+</html>

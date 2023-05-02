@@ -1,0 +1,183 @@
+﻿@{
+    float Bathrooms =0;
+    string myquery = "";
+    string url ="";
+    string modeSelected ="";
+    string tipoSelected ="";
+    string areaSelected = "";
+    string orderSelected = "";
+    string orderParticle ="";
+    string test ="";
+    var areaQueryString = "SELECT DISTINCT Area FROM Properties ORDER BY Area ASC";
+    var selectQueryString ="";
+    var picData = "";
+    List<string> photoNames = new List<string>();
+    var folderPath="";
+
+    var db = Database.Open("RUASA");
+
+    if (!WebSecurity.IsAuthenticated) {
+        Response.Redirect("~/Account/Login?returnUrl="
+            + Request.Url.LocalPath);
+    }
+
+
+
+    try { 
+        url = HttpContext.Current.Request.Url.AbsoluteUri;
+        var uri = new Uri(url);
+        var urlParsed = HttpUtility.ParseQueryString(uri.Query);
+        modeSelected = urlParsed["cb-mode"];
+        tipoSelected = urlParsed["cb-tipo"];
+        areaSelected = urlParsed["cb-area"]; 
+        orderSelected = urlParsed["cb-order"];
+
+        if (orderSelected== "" || orderSelected==null || orderSelected=="Elegir" || orderSelected=="Precio menor a mayor") {
+            orderParticle = "ASC";
+        } else {
+            orderParticle = "DESC";
+        }
+         
+        if (modeSelected == "" || modeSelected ==null || areaSelected=="" || areaSelected==null || orderSelected == "" || orderSelected == null) {
+            selectQueryString = "SELECT * FROM Properties WHERE Promoted = 1 ORDER BY AGE";
+        } else if (modeSelected!="Todas" && areaSelected=="Todas") {
+            if(tipoSelected=="Todas"){
+                selectQueryString = "SELECT * FROM Properties WHERE MODO = '" + modeSelected + "' ORDER BY Price " + orderParticle;
+            } else {
+                selectQueryString = "SELECT * FROM Properties WHERE TIPO = '" + tipoSelected + "' AND MODO = '" + modeSelected + "' ORDER BY Price " + orderParticle;
+            }            
+        } else if (modeSelected=="Todas" && areaSelected!="Todas") {
+            if (tipoSelected=="Todas") {
+                selectQueryString = "SELECT * FROM Properties WHERE Area = '" + areaSelected + "' ORDER BY Price " + orderParticle;
+            } else {
+                selectQueryString = "SELECT * FROM Properties WHERE TIPO = '" + tipoSelected + "' AND Area = '" + areaSelected + "' ORDER BY Price " + orderParticle;
+            }            
+        } else if (modeSelected=="Todas" || areaSelected=="Todas") {
+            if (tipoSelected=="Todas") {
+                selectQueryString = "SELECT * FROM Properties ORDER BY Price " + orderParticle;
+            } else {
+                selectQueryString = "SELECT * FROM Properties WHERE TIPO = '" + tipoSelected + "' ORDER BY Price " + orderParticle;
+            }            
+        } else if (modeSelected!="Todas" && areaSelected!="Todas") {
+            if (tipoSelected=="Todas") {
+                selectQueryString = "SELECT * FROM Properties WHERE  Area = '" + areaSelected + "' AND MODO = '" + modeSelected + "' ORDER BY Price " + orderParticle;   
+            } else {
+                selectQueryString = "SELECT * FROM Properties WHERE TIPO = '" + tipoSelected + "' AND Area = '" + areaSelected + "' AND MODO = '" + modeSelected + "' ORDER BY Price " + orderParticle;   
+            }
+           
+        } else {
+            selectQueryString = "SELECT * FROM Properties WHERE Promoted = 1 ORDER BY Price " + orderParticle;
+        }
+    } catch {
+        selectQueryString = "SELECT * FROM Properties WHERE Promoted = 1 ORDER BY Price";
+    }
+
+
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RUASA - Administrar Propiedades</title>
+        <link rel="stylesheet" type="text/css" href="~/Styles/PropertyAdminStyles.css">
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Members/HeaderAdmin.cshtml")
+
+        <!--SEARCH SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/SearchBar.cshtml")
+        <div id="inventory">
+            <div id="wrapper">
+                <div id="container">
+                    <!--PROPERTY RESULTS SECTION---------------------------------------------------------------->
+                    <ul class="property-grid">
+                        @foreach(var row in db.Query(selectQueryString)){
+                            <li>
+                                <!--WRAPPER LEFT---------------------------------------------------------------->
+                                <div class="wrapper-left">
+                                    <div class="property-image">
+                                        @{
+                                        try {
+                                            folderPath = HttpContext.Current.Server.MapPath("~/Resources/" + @row.Id);
+                                            foreach (string file in Directory.GetFiles(folderPath)) {
+                                                picData = Path.GetFileNameWithoutExtension(file);
+                                                photoNames.Add(picData);
+                                            }
+                                            folderPath = "~/Resources/" + @row.Id;
+                                            <img src="@Href(@folderPath + "/1.jpg")" alt="IMAGE NOT AVAILABLE"></img>
+                                        } catch {
+                                            folderPath = "~/Resources/Default";
+                                            <img src="@Href(@folderPath + "/1.jpg")" alt="N/A"></img>
+                                        } 
+                                        }                                        
+                                    </div>
+                                </div>
+                                <!--WRAPPER MIDDLE-------------------------------------------------------------->
+                                <div class="wrapper-middle">
+                                    <div class="property-title">
+                                        @row.Tipo en @row.Modo 
+                                    </div>
+                                    <hr>
+                                    <div class="property-area">
+                                        @row.Area
+                                    </div>
+                                    <div class="property-price">
+                                        @{
+                                            decimal decMoneyValue = @row.Price;
+                                            string moneyValue = String.Format("{0:C}", decMoneyValue);
+                                        }
+                                        @moneyValue
+                                    </div> 
+                                    <hr>
+                                    <div class="property-description">
+                                        Descripción: @row.Description
+                                    </div>
+                                    <div class="property-observations">
+                                        Observaciones: @row.Observations
+                                    </div>
+                                    <div class="property-builtm2">
+                                        @row.Builtm2  m2
+                                    </div>
+                                    <div class="property-landm2">
+                                        @row.Landm2  m2
+                                    </div>
+                                    <hr>
+                                    @if(@row.Publish==true){
+                                        <div style="color: #4cff00">
+                                            PUBLICADA
+                                        </div>
+                                    } else {
+                                        <div style="color: #f00">
+                                            NO PUBLICADA
+                                        </div>                                        
+                                    }
+                                    @if(@row.Promoted==true){
+                                        <div style="color: #4cff00">
+                                            PROMOVIDA
+                                        </div>                                        
+                                    } else {
+                                        <div style="color: #f00">
+                                            NO PROMOVIDA
+                                        </div>
+                                    }
+                                </div>
+                                <!--WRAPPER RIGHT-------------------------------------------------------------->
+                                <div class="wrapper-right">
+                                    <input class="button-detalles" type="button" value="Detalle" onclick="location.href ='../PropertyDetail/@row.Id'" />              
+                                    <input class="button-editar" type="button" value="Editar" onclick="location.href ='UpdateProperties/@row.Id'" />
+                                    <input class="button-photos" type="button" value="Fotos" onclick="location.href ='EditPhotoCaption/@row.Id'" />
+                                    <!--ANOTHER WAY<a href="@Href("~/UpdateProperties", row.Id)">Edit</a>-->
+                                    <input class="button-eliminar" type="button" value="Eliminar" onclick="location.href ='DeleteProperties/@row.Id'" />
+                                </div>                                     
+                            </li>
+                        }
+                    </ul>      
+                </div>
+            </div>
+        </div>               
+        <!--FOOTER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Footer.cshtml")
+    </body>
+</html>

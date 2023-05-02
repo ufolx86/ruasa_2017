@@ -1,0 +1,218 @@
+﻿@{
+    Validation.RequireField("Modo", "El modo es requerido.");
+    Validation.RequireField("Tipo", "El tipo es requerido.");    
+    Validation.RequireField("Area", "La Colonia es requerida.");
+    Validation.RequireField("Street", "La Calle es requerida.");
+    Validation.RequireField("Number", "El número es requerido.");
+    Validation.RequireField("Price", "El precio es requerido.");
+    Validation.RequireField("Landm2", "Los metros de terreno son requeridos.");
+
+    bool? Promoted = null;
+    bool? Publish = null;
+
+    var db = Database.Open("RUASA");
+
+    var Modo = Request.Form["Modo"];
+    var Tipo = Request.Form["Tipo"];
+    var Area = Request.Form["Area"];
+    var Street = Request.Form["Street"];
+    var Number = Request.Form["Number"];
+    var Price = Request.Form["Price"];
+    var Builtm2 = Request.Form["Builtm2"];
+    var Landm2 = Request.Form["Landm2"];
+    var Room = Request.Form["Room"];
+    var CompleteBathroom = Request.Form["CompleteBathroom"];
+    var HalfBathroom = Request.Form["HalfBathroom"];
+    var TVRoom = Request.Form["TVRoom"];
+    var Kitchen = Request.Form["Kitchen"];
+    var StudyRoom = Request.Form["StudyRoom"];
+    var ServiceRoom = Request.Form["ServiceRoom"];
+    var Garage = Request.Form["Garage"];
+    var Garden = Request.Form["Garden"];
+    var Levels = Request.Form["Levels"];
+    var Age = Request.Form["Age"];
+    var Observations = Request.Form["Observations"];
+    var Commission = Request.Form["Commission"];
+    var LandUse = Request.Form["LandUse"];
+    var Description = Request.Form["Description"];
+    //var a1=(Request.Form["a1"]=="on") ? 1 : 0;
+    var cbCheck=Request.Form["Publish"];
+    if (cbCheck=="on"){
+        Publish = true;
+    } else {
+        Publish = false;
+    }
+    cbCheck=Request.Form["Promoted"];
+    if (cbCheck=="on") {
+        Promoted = true;
+    } else {
+        Promoted = false;
+    }
+
+    if (IsPost && Validation.IsValid()) {
+        // Define the insert query. The values to assign to the
+        // columns in the Product table are defined as parameters
+        // with the VALUES keyword.
+        if(ModelState.IsValid) {
+            var insertQuery = "INSERT INTO Properties (Area, Street, Number, Price," +
+                              "Builtm2, Landm2, Room, CompleteBathroom, HalfBathroom," +
+                              "TVRoom, Kitchen, StudyRoom, ServiceRoom, Garage, Garden," +
+                              "Levels, Age, Observations, Commission, LandUse, Tipo, Modo, Description, Publish, Promoted)" +
+                              "VALUES (@0,@1,@2,@3,@4,@5,@6,@7,@8,@9,@10,@11,@12,@13,@14,@15,@16,@17," +
+                              "@18,@19,@20,@21,@22,@23,@24)";
+
+            db.Execute(insertQuery, Area, Street, Number, Price,
+                              Builtm2, Landm2, Room, CompleteBathroom, HalfBathroom,
+                              TVRoom, Kitchen, StudyRoom, ServiceRoom, Garage, Garden,
+                              Levels, Age, Observations, Commission, LandUse, Tipo, Modo, Description, Publish, Promoted);
+            // Display the page that lists properties.
+            Response.Redirect("~/Members/PropertyAdmin");
+        }
+    }
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RUASA - Añadir Propiedades</title>
+        <style type="text/css">
+            label {float:left; width: 8em; text-align: right; margin-right: 0.5em;}
+            fieldset {padding: 1em; border: 1px solid; width: 50em;}
+            legend {padding: 2px 4px; border: 1px solid; font-weight:bold;}
+            .validation-summary-errors {font-weight:bold; color:red; font-size:11pt;}
+        </style>
+        <link rel="stylesheet" type="text/css" href="~/Styles/InsertPropertiesStyles.css">
+    </head>
+    <body>
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Members/HeaderAdmin.cshtml")
+        <div id="add-properties">
+            <div id="wrapper">
+                <div id="container">
+                    @Html.ValidationSummary("Errores en el guardado:")
+
+                    <form method="post" action="">
+                        <fieldset>
+                            <legend>Añadir Propiedad</legend>
+                               <div>
+                                    <label>Modo:</label>
+                                    <input name="Modo" type="text" value="@Modo" />
+                               </div>
+                               <div>
+                                    <label>Tipo:</label>
+                                    <input name="Tipo" type="text" value="@Tipo" />
+                               </div>
+                               <div>
+                                    <label>Colonia:</label>
+                                    <input name="Area" type="text" value="@Area" />
+                               </div>
+                               <div>
+                                    <label>Calle:</label>
+                                    <input name="Street" type="text" value="@Street" />
+                                    Exclusivo RUASA
+                               </div>
+                               <div>
+                                    <label>Número:</label>
+                                    <input name="Number" type="text" value="@Number" />
+                                    Exclusivo RUASA
+                               </div>
+                               <div>
+                                    <label>Precio:</label>
+                                    <input name="Price" type="text" value="@Price" />
+                               </div>
+                               <div>
+                                    <label>M2 Construcción:</label>
+                                    <input name="Builtm2" type="text" value="@Builtm2" />
+                               </div>
+                               <div>
+                                    <label>M2 Terreno:</label>
+                                    <input name="Landm2" type="text" value="@Landm2" />
+                               </div>
+                               <div>
+                                    <label>Recámaras:</label>
+                                    <input name="Room" type="text" value="@Room" />
+                               </div>
+                               <div>
+                                    <label>Baños Completos:</label>
+                                    <input name="CompleteBathroom" type="text" value="@CompleteBathroom" />
+                               </div>
+                               <div>
+                                    <label>Medios Baños:</label>
+                                    <input name="HalfBathroom" type="text" value="@HalfBathroom" />
+                               </div>
+                               <div>
+                                    <label>Cuarto de TV:</label>
+                                    <input name="TVRoom" type="text" value="@TVRoom" />
+                               </div>
+                               <div>
+                                    <label>Cocina Equipada:</label>
+                                    <input name="Kitchen" type="text" value="@Kitchen" />
+                               </div>
+                               <div>
+                                    <label>Estudio:</label>
+                                    <input name="StudyRoom" type="text" value="@StudyRoom" />
+                               </div>
+                               <div>
+                                    <label>Cuarto de Servicio:</label>
+                                    <input name="ServiceRoom" type="text" value="@ServiceRoom" />
+                               </div>
+                               <div>
+                                    <label># Autos Garage:</label>
+                                    <input name="Garage" type="text" value="@Garage" />
+                               </div>
+                               <div>
+                                    <label>Jardín:</label>
+                                    <input name="Garden" type="text" value="@Garden" />
+                               </div>
+                               <div>
+                                    <label>Niveles:</label>
+                                    <input name="Levels" type="text" value="@Levels" />
+                               </div>
+                               <div>
+                                    <label>Antigüedad:</label>
+                                    <input name="Age" type="text" value="@Age" />
+                               </div>
+                               <div>
+                                    <label>Observaciones:</label>
+                                    <input name="Observations" type="text" size="500" value="@Observations" style="width: 60%"/>
+                                    Exclusivo RUASA
+                               </div>
+                               <div>
+                                    <label>Comisión:</label>
+                                    <input name="Commission" type="text" value="@Commission" />
+                                    Exclusivo RUASA
+                               </div>
+                               <div>
+                                  <label>Uso de Suelo:</label>
+                                  <input name="LandUse" type="text" value="@LandUse" />
+                               </div>
+                               <div>
+                                  <label>Descripción:</label>
+                                  <input name="Description" type="text" size="500" value="@Description" style="width: 60%"/>
+                               </div>      
+                               <div>
+                                  <label>Publicar</label>
+                                  <input name="Publish" type="checkbox" value="@Publish" />
+                               </div>      
+                               <div>
+                                  <label>Promovida</label>
+                                   @Html.CheckBox("Promoted", @Promoted)  
+                                  <!--<input name="Promoted" type="checkbox" value="@Promoted" />-->
+                               </div>  
+                                                                                   
+                               <div>
+                                  <label>&nbsp;</label>
+                                  <input type="submit" value="Añadir" class="submit" />
+                               </div>
+                        </fieldset>
+                    </form>
+                    <!--<form action="upload.php" method="post" enctype="multipart/form-data">
+                        Select image to upload:
+                        <input type="file" name="fileToUpload" id="fileToUpload">
+                        <input type="submit" value="Upload Image" name="submit">
+                    </form>-->
+                </div>
+            </div>
+        </div>    
+    </body>
+</html>
