@@ -1,0 +1,16 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family:    'Palatino Linotype';
+}
+
+#wrapper {
+    width:          100%;
+    overflow:       hidden;
+
+}
+#container {
+    width:          100%;
+    margin:         0 auto;
+    margin-top:     135px;
+}

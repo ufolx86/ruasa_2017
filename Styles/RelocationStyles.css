@@ -1,0 +1,82 @@
+body, html{
+      margin:0;
+      padding:0;
+      font-family:    'Palatino Linotype';
+}
+
+/*TOPICS SECTION-----------------------------------------------------------------------------------*/
+
+#wrapper {
+    width:          100%;
+    overflow:       hidden;
+
+}
+#container {
+    width:          100%;
+    margin:         0 auto;
+    margin-top: 120px;
+}
+
+.relocation-offer {
+    margin: 1em 0.1em;
+	max-width: 1200px;
+    margin-top: 120px;
+    margin-left: 2%;
+}
+
+.relocation-offer #offer {
+    border: 2px solid #808080;
+    padding: 2%;
+    width: 90%;
+    height: auto;
+    display: inline-block;
+    box-shadow:     0 5px 5px 0 #bce;
+    margin: .1em;
+}
+
+
+/*WRAPPER LEFT--------------------------------------------------------------------------*/
+#wrapper-left {
+    float: left;
+    width: 30%;
+    margin: 1em;
+}
+    #offer-image img{
+        width: 100%;        
+        padding-top: 1em;
+        min-width: 250px;
+    }
+
+
+/*WRAPPER MIDDLE--------------------------------------------------------------------------*/
+#wrapper-middle {
+    float: left;
+    width: 60%;
+    margin: 1em;
+}
+    #offer-title {
+       width: 120%;
+       font-weight: bold;
+       font-size: 1.15em;
+       color: #425fd0;
+       margin-top: -8%;
+       margin-left: 6%;
+    }
+
+    hr {
+        margin-left: 10%;
+    }
+
+    #offer-detail {
+       width: 100%;
+       font-size: .85em;
+       color: black;
+       margin-left: 6%;
+    }
+
+/*ADJUST SEARCH SECTION TO RESPONSIVE SMALLER-------------------------------------------------------*/
+@media screen and (min-width : 150px) and (max-width:450px) {
+    #offer-title {
+        font-size: 1em;
+    }
+}

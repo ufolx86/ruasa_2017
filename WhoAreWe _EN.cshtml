@@ -1,0 +1,59 @@
+﻿@{
+    
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>RUASA - Who are we?</title>
+        <link rel="stylesheet" type="text/css" href="Styles/WhoAreWeStyles.css">
+    </head>
+    <body>
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Header_EN.cshtml")    
+
+        <!--ABOUT US SECTION-------------------------------------------------------------------------->
+        <div id="about-us">
+            <div id="wrapper">
+                <h1 id="title">Who are we?</h1>
+                <div id="container">
+                    
+                    <p>Established in the city of Queretaro since 1997, offering that professional and personalized 
+                       service you are expecting.
+                       We possess a vast portfolio of real estate properties in the area, both on lease and on sale;
+                       from B grade properties to AA exclusive residences; from small commercial spaces to whole buildings;
+                       lands from single family to large areas for commercial and residential complexes. We also aid you in
+                       your search for warehouses and industrial spaces, according to your business activity.
+                        <br><br>
+                        In addition, if you are arriving to Queretaro, we make your landing easier, due to the fact that we 
+                        offer relocation services, through which you will be asigned an advisor, to support and aid you
+                        in finding the solutions to all the aspects related to you new home.
+                    </p>
+                    
+
+                </div>
+                <h2 id="service-title">Our services</h2>
+                <div id="our-services">
+                    
+                </div> 
+                <div id="services">
+                    <ul>
+                        <li>Sale</li>
+                        <li>Lease</li>
+                        <li>Property management</li>
+                        <li>Contract arrangements</li>
+                        <li>Relocation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="lema">
+            <h2>Our main goal: "YOUR SATISFACTION AT 100%"</h2>
+        </div> 
+               
+        <!--FOOTER SECTION-------------------------------------------------------------------------->
+        @RenderPage("Footer.cshtml") 
+    </body>
+</html>

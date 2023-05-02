@@ -1,0 +1,37 @@
+.header-admin-wrapper {
+    background-color: #687bd4;
+    width: 100%;
+    z-index: 200;
+    font-family:    'Palatino Linotype';
+}
+
+.float-right-admin {
+    float: right;
+}
+
+    .float-right-admin li {
+        display:        inline-block;
+        font-weight:    bold;
+        font-size: 80%;
+        list-style-type: none;
+        text-align: center;
+    }
+
+    .float-right-admin a {
+        text-decoration: none;
+        color: white;
+        padding: 14px 16px;
+    }
+
+/*NAV SECTION------------------------------------------------------------------------*/
+#lower-left-section-admin {
+}
+
+#lower-left-section-admin li a:hover:not(.active) {
+    background-color: #1e39a3;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+

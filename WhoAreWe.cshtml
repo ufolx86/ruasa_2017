@@ -1,0 +1,61 @@
+﻿@{
+    
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>RUASA - ¿Quiénes somos?</title>
+        <link rel="stylesheet" type="text/css" href="Styles/WhoAreWeStyles.css">
+    </head>
+    <body>
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Header.cshtml")    
+
+        <!--ABOUT US SECTION-------------------------------------------------------------------------->
+        <div id="about-us">
+            <div id="wrapper">
+                <h1 id="title">¿Quiénes somos?</h1>
+                <div id="container">
+                    
+                    <p>Establecidos en la Ciudad de Querétaro desde 1997 brindándote ese servicio profesional 
+                        y personalizado que estás esperando.
+                        Contamos con una amplia cartera de inmuebles en la zona, tanto en renta como en venta;
+                        desde vivienda media hasta exclusivas residencias; desde pequeños locales comerciales
+                        hasta edificios completos; desde terrenos unifamiliares hasta macrolotes para
+                        desarrollos comerciales o habitacionales. También te ayudamos en la búsqueda de plantas 
+                        y lotes industriales, según el giro de tu empresa.
+                        <br><br>
+                        Además, si vienes llegando a Querétaro, hacemos que tu llegada sea más fácil, ya que
+                        contamos con servicios de reubicación, mediante el cual se te asignará un asesor para
+                        ayudarte y apoyarte a encontrar soluciones a todos y cada uno de los aspectos relacionados
+                        a tu cambio de residencia.
+                    </p>
+                    
+
+                </div>
+                <h2 id="service-title">Nuestros Servicios</h2>
+                <div id="our-services">
+                    
+                </div> 
+                <div id="services">
+                    <ul>
+                        <li>Venta</li>
+                        <li>Renta</li>
+                        <li>Administración de Propiedades</li>
+                        <li>Gestión de contratos</li>
+                        <li>Reubicación</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="lema">
+            <h2>Nuestro principal objetivo: "TU SATISFACCIÓN AL 100%"</h2>
+        </div> 
+               
+        <!--FOOTER SECTION-------------------------------------------------------------------------->
+        @RenderPage("Footer.cshtml") 
+    </body>
+</html>

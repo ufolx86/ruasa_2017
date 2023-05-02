@@ -1,0 +1,97 @@
+﻿@{
+    var customerName = Request["customerName"];
+    ///var catchedFilter = window.location.hash.substring(1);
+    ///var queryString = url.Substring(url.IndexOf('?')).Split('#')[0];
+    var errorMessage = ""; 
+    float Bathrooms =0;
+    var db = Database.Open("RUASA");
+    
+    var selectQueryString = "SELECT * FROM Properties WHERE Modo = 'queryString'";
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        
+
+        <!--SEARCH SECTION-------------------------------------------------------------------------->
+        <div id="search-bar">
+            <div id="wrapper">
+                <div id="container">
+
+                </div>
+            </div>
+        </div>
+     
+       
+        <!--PROPERTY RESULTS SECTION------------------------------------------------------------------>
+        <ul class="property-grid">
+            @foreach(var row in db.Query(selectQueryString)){
+                <li>
+                    <div class="property-title">
+                        @row.Tipo en @row.Modo 
+                    </div>
+                    <div class="property-image">
+                        <img src="Resources/@row.Id/1.jpg" alt="n/a"></img>
+                    </div>
+                    <div class="property-upper-container">                    
+                        <div class="property-info-left">
+                            <div class="property-area">
+                                @row.Area
+                            </div>
+                            <div class="property-price">
+                                @{
+                                    decimal decMoneyValue = @row.Price;
+                                    string moneyValue = String.Format("{0:C}", decMoneyValue);
+                                }
+                                @moneyValue
+                            </div>     
+                        </div>
+                        <div class="property-info-right">
+                            <div>
+                                <a class="button-detalles" type="button" href="~/Contact.cshtml"><span>Detalles</span></a>
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="property-lower-container">
+                        <table class="property-table">
+                            <tr class="table-first-row">
+                                <td>C: @row.Builtm2  m2</td>
+                                <td>
+                                    @row.Room
+                                    <img src="Resources/Description/Room.png" alt="n/a"></img>
+                                </td>                                    
+                                <td>
+                                    @{
+                                        Bathrooms = row.CompleteBathroom + row.HalfBathroom; 
+                                    }   
+                                    @Bathrooms     
+                                    <img src="Resources/Description/Bath.png" alt="n/a"></img>                             
+                                </td>
+                            </tr>
+                            <tr class="table-second-row">
+                                <td>T: @row.Landm2  m2</td>
+                                <td>
+                                    @row.Garage
+                                    <img src="Resources/Description/Garage.png" alt="n/a"></img>
+                                </td>
+                                <td>
+                                    @row.Levels
+                                    <img src="Resources/Description/Levels.png" alt="n/a"></img>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>                                        
+                </li>
+            }
+        </ul>
+        <!--FOOTER SECTION-------------------------------------------------------------------------->
+        @RenderPage("Footer.cshtml")
+    </body>
+</html>

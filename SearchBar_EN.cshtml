@@ -1,0 +1,107 @@
+@{
+    string url ="";
+    string modeSelected ="";
+    List<string> modeList = new List<string>();  
+    modeList.Add("All");
+    modeList.Add("Lease"); 
+    modeList.Add("Sale"); 
+    string tipoSelected ="";
+    List<string> tipoList = new List<string>();  
+    tipoList.Add("All");
+    tipoList.Add("House");
+    tipoList.Add("Land"); 
+    tipoList.Add("Warehouse"); 
+    tipoList.Add("Retail");
+    tipoList.Add("Appartment"); 
+    tipoList.Add("Office");
+    string areaSelected = "";
+    string orderSelected = "";
+    string orderParticle ="";
+    List<string> orderList = new List<string>();
+    orderList.Add("Select");
+    orderList.Add("Ascending Price"); 
+    orderList.Add("Descending Price");  
+    var db = Database.Open("RUASA");
+    var areaQueryString = "SELECT DISTINCT Area FROM Properties ORDER BY Area ASC";
+
+    try { 
+        url = HttpContext.Current.Request.Url.AbsoluteUri;
+        var uri = new Uri(url);
+        var urlParsed = HttpUtility.ParseQueryString(uri.Query);
+
+        modeSelected = urlParsed["cb-mode"];
+        tipoSelected = urlParsed["cb-tipo"];
+        areaSelected = urlParsed["cb-area"]; 
+        orderSelected = urlParsed["cb-order"];
+    } catch {
+        
+    }
+
+}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="~/Styles/SearchBarStyles.css">
+        <title></title>
+    </head>
+    <body>
+        <div class="center">
+            <form class="search-bar">
+                <div class="first-batch">
+                    <!--AREA COMBOBOX------------------------------------------------------------------->
+                    <p class="area-title">Suburb:</p>
+                    <select class="areaSelect" name="cb-area">
+                        <option value="Todas">All</option>
+                        @foreach(var row in db.Query(areaQueryString)){
+                            if(@areaSelected==@row.Area) {
+                                <option selected="selected" value="@row.Area">@row.Area</option>
+                            } else {
+                                <option value="@row.Area">@row.Area</option>
+                            }
+                        }
+                    </select>
+                    <!--TIPO COMBOBOX------------------------------------------------------------------->
+                    <p class="tipo-title">Type:</p>
+                    <select class="tipoSelect" name="cb-tipo">
+                        @foreach(var listItem in @tipoList){
+                            if(@tipoSelected==@listItem) {
+                                <option selected="selected" value="@listItem">@listItem</option>
+                            } else {
+                                <option value="@listItem">@listItem</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="second-batch">
+                    <!--MODE COMBOBOX------------------------------------------------------------------->
+                    <p class="mode-title">Mode:</p>
+                    <select class="modeSelect" name="cb-mode">
+                        @foreach(var listItem in @modeList){
+                            if(@modeSelected==@listItem) {
+                                <option selected="selected" value="@listItem">@listItem</option>
+                            } else {
+                                <option value="@listItem">@listItem</option>
+                            }
+                        }
+                    </select>
+                    <!--ORDER COMBOBOX------------------------------------------------------------------>
+                    <p class="order-title">Order:</p>
+                    <select class="orderSelect" name="cb-order">
+                        @foreach(var listItem in @orderList){
+                            if(@orderSelected==@listItem) {
+                                <option selected="selected" value="@listItem">@listItem</option>
+                            } else {
+                                <option value="@listItem">@listItem</option>
+                            }
+                        }
+                    </select>
+                    <!--SEARCH BUTTON------------------------------------------------------------------->
+                    <button id="searchButton">Search</button>
+                </div>
+            </form>
+        </div>        
+    </body>
+</html>

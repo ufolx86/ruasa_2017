@@ -1,0 +1,230 @@
+﻿@{
+    Validation.RequireField("Modo", "El modo es requerido.");
+    Validation.RequireField("Tipo", "El tipo es requerido.");
+    Validation.RequireField("Area", "La Colonia es requerida.");
+    Validation.RequireField("Street", "La Calle es requerida.");
+    Validation.RequireField("Number", "El número es requerido.");
+    Validation.RequireField("Price", "El precio es requerido.");
+    Validation.RequireField("Landm2", "Los metros de terreno son requeridos.");
+    
+    var Modus = "";
+    var Tipo = "";
+    var Area = "";
+    var Street = "";
+    var Number = 0;
+    var Price = Decimal.Zero;
+    int? Builtm2 = null;
+    var Landm2 = 0;
+    int? Room = null;
+    int? CompleteBathroom = null;
+    int? HalfBathroom = null;
+    int? TVRoom = null;
+    int? Kitchen = null;
+    int? StudyRoom = null;
+    int? ServiceRoom = null;
+    int? Garage = null;
+    int? Garden = null;
+    int? Levels = null;
+    int? Age = null;
+    var Observations = "";
+    float? Commission = null;
+    var LandUse = "";
+    var Description = "";
+
+    var PropertyId  = UrlData[0];
+    if (PropertyId.IsEmpty()) {
+         Response.Redirect("~/EditProperties");
+    }
+
+    var db = Database.Open("RUASA");
+
+    if (IsPost && Validation.IsValid()) {
+        var updateQueryString =
+            "UPDATE Properties SET Area=@0, Street=@1, Number=@2, Price=@3," +
+            "Builtm2=@4, Landm2=@5, Room=@6, CompleteBathroom=@7," +
+            "HalfBathroom=@8, TVRoom=@9, Kitchen=@10, StudyRoom=@11," +
+            "ServiceRoom=@12, Garage=@13, Garden=@14, Levels=@15," +
+            "Age=@16, Observations=@17, Commission=@18, LandUse=@19," +
+            "Tipo=@20, Modo=@21, Description=@22 WHERE Id=@23";
+
+        Area = Request["Area"];
+        Street = Request["Street"];
+        Number = Request["Number"].AsInt();
+        Price = Request["Price"].AsDecimal();
+        Builtm2 = Request["Builtm2"].AsInt();
+        Landm2 = Request["Landm2"].AsInt();  
+        Room = Request["Room"].AsInt();
+        CompleteBathroom = Request["CompleteBathroom"].AsInt();
+        HalfBathroom = Request["HalfBathroom"].AsInt();
+        TVRoom = Request["TVRoom"].AsInt();
+        Kitchen = Request["Kitchen"].AsInt();
+        StudyRoom = Request["StudyRoom"].AsInt();
+        ServiceRoom = Request["ServiceRoom"].AsInt();
+        Garage = Request["Garage"].AsInt();
+        Garden = Request["Garden"].AsInt();
+        Levels = Request["Levels"].AsInt();
+        Age = Request["Age"].AsInt();
+        Observations = Request["Observations"];
+        Commission = Request["Commission"].AsFloat();
+        LandUse = Request["LandUse"];
+        Tipo = Request["Tipo"];
+        Modus = Request["Modo"];
+        Description = Request["Description"];
+
+        db.Execute(updateQueryString, Area, Street, Number, Price, Builtm2, Landm2, Room, CompleteBathroom, HalfBathroom,
+            TVRoom, Kitchen, StudyRoom, ServiceRoom, Garage, Garden, Levels, Age, Observations, Commission, LandUse,
+            Tipo, Modus, Description, PropertyId);
+        Response.Redirect(@Href("~/EditProperties"));
+    }
+    else {
+        var selectQueryString = "SELECT * FROM Properties WHERE Id=@0";
+
+        var row = db.QuerySingle(selectQueryString, PropertyId);
+        Area = row.Area;
+        Street = row.Street;
+        Number = row.Number;
+        Price = row.Price;
+        Builtm2 = row.Builtm2;
+        Landm2 = row.Landm2;
+        Room = row.Room;
+        CompleteBathroom = row.CompleteBathroom;
+        HalfBathroom = row.HalfBathroom;
+        TVRoom = row.TVRoom;
+        Kitchen = row.Kitchen;
+        StudyRoom = row.StudyRoom;
+        ServiceRoom = row.ServiceRoom;
+        Garage = row.Garage;
+        Garden = row.Garden;
+        Levels = row.Levels;
+        Age = row.Age;
+        Observations = row.Observations;
+        Commission = Convert.ToSingle(row.Commission);
+        LandUse = row.LandUse;
+        Tipo = row.Tipo;
+        Modus = row.Modo;
+        Description = row.Description;
+    }
+
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Add Properties</title>
+      <style type="text/css">
+         label { float: left; width: 8em; text-align: right;
+                 margin-right: 0.5em;}
+         fieldset { padding: 1em; border: 1px solid; width: 35em;}
+         legend { padding: 2px 4px;  border: 1px solid; font-weight: bold;}
+         .validation-summary-errors {font-weight:bold; color:red; font-size:11pt;}
+      </style>
+    </head>
+    <body>
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Members/HeaderAdmin.cshtml")          
+        
+        <h1>Update Product</h1>
+       @Html.ValidationSummary("Errores en el guardado:")
+       <form method="post" action="">
+         <fieldset>
+           <legend>Actualizar Información</legend>
+           <div>
+             <label>Modo:</label>
+             <input name="Modo" type="text" size="50" value="@Modus" />
+           </div>
+           <div>
+             <label>Tipo:</label>
+             <input name="Tipo" type="text" size="50" value="@Tipo" />
+           </div>
+           <div>
+              <label>Colonia:</label>
+              <input name="Area" type="text" size="50" value="@Area" />
+           </div>
+           <div>
+              <label>Calle:</label>
+              <input name="Street" type="text" size="50" value="@Street" />
+           </div>
+           <div>
+             <label>Número:</label>
+             <input name="Number" type="text" size="50" value="@Number" />
+           </div>
+           <div>
+             <label>Precio:</label>
+             <input name="Price" type="text" size="50" value="@Price" />
+           </div>
+           <div>
+              <label>M2 Construcción:</label>
+              <input name="Builtm2" type="text" size="50" value="@Builtm2" />
+           </div>
+           <div>
+              <label>M2 Terreno:</label>
+              <input name="Landm2" type="text" size="50" value="@Landm2" />
+           </div>
+           <div>
+             <label>Recámaras:</label>
+             <input name="Room" type="text" size="50" value="@Room" />
+           </div>
+           <div>
+             <label>Baños Completos:</label>
+             <input name="CompleteBathroom" type="text" size="50" value="@CompleteBathroom" />
+           </div>
+           <div>
+              <label>Medios Baños:</label>
+              <input name="HalfBathroom" type="text" size="50" value="@HalfBathroom" />
+           </div>
+           <div>
+              <label>Cuarto de TV:</label>
+              <input name="TVRoom" type="text" size="50" value="@TVRoom" />
+           </div>
+           <div>
+              <label>Cocina Equipada:</label>
+              <input name="Kitchen" type="text" size="50" value="@Kitchen" />
+           </div>
+           <div>
+              <label>Estudio:</label>
+              <input name="StudyRoom" type="text" size="50" value="@StudyRoom" />
+           </div>
+           <div>
+              <label>Cuarto de Servicio:</label>
+              <input name="ServiceRoom" type="text" size="50" value="@ServiceRoom" />
+           </div>
+           <div>
+              <label># Autos Garage:</label>
+              <input name="Garage" type="text" size="50" value="@Garage" />
+           </div>
+           <div>
+              <label>Jardín:</label>
+              <input name="Garden" type="text" size="50" value="@Garden" />
+           </div>
+           <div>
+              <label>Niveles:</label>
+              <input name="Levels" type="text" size="50" value="@Levels" />
+           </div>
+           <div>
+              <label>Antigüedad:</label>
+              <input name="Age" type="text" size="50" value="@Age" />
+           </div>
+           <div>
+              <label>Observaciones:</label>
+              <input name="Observations" type="text" size="50" value="@Observations" />
+           </div>
+           <div>
+              <label>Comisión:</label>
+              <input name="Commission" type="text" size="50" value="@Commission" />
+           </div>
+           <div>
+              <label>Uso de Suelo:</label>
+              <input name="LandUse" type="text" size="50" value="@LandUse" />
+           </div>
+           <div>
+              <label>Descripción:</label>
+              <input name="Description" type="text" size="50" value="@Description" />
+           </div>
+           <div>
+              <label>&nbsp;</label>
+              <input type="submit" value="Guardar" class="submit" />
+           </div>
+        </fieldset>
+      </form>
+    </body>
+</html>

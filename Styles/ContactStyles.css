@@ -1,0 +1,172 @@
+body, html{
+    margin:0;
+    padding:0;
+    font-family: 'Palatino Linotype';
+}
+
+h1 {
+    font-size: 2em;
+    color: #425fd0; 
+}
+
+h3 {
+    font-size:1em;
+    padding: 0px;
+    margin: 0px;
+}
+
+#wrapper {
+    width:          90%;
+    overflow:       hidden;
+}
+
+#container {
+    margin-top: 140px;
+
+}
+/*CONTAINER TOP*/
+#container-top {
+    width: 100%;
+    height: fit-content;
+    height: auto;
+    margin: 2em;
+    margin-top: 50px;
+    margin-left: 10%;
+}
+    /*FORM SECTION-----*/
+    .wrapper-left {
+        width: 30%;
+        height: 100px;
+        padding: 2em;
+        float: left;
+        margin-left: 5%;
+        /*border: 2px solid #808080;*/
+    }
+
+    .wrapper-right {
+        width: 30%;
+        height: 100px;
+        /*border: 2px solid #808080;*/
+        padding: 2em;
+        float: right;
+        margin-right: 10%;
+
+    }
+
+        /* ===========================
+           ====== Contact Form ======= 
+           =========================== */
+
+        input, textarea {
+	        padding: 10px;
+	        border: 1px solid #E5E5E5;
+	        width: 200px;
+	        color: #999999;
+	        box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	        -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;
+	        -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 8px;		
+        }
+
+
+        textarea {
+	        width: 300px;
+	        height: 150px;
+	        max-width: 400px;
+	        line-height: 18px;
+        }
+
+        input:hover, textarea:hover,
+        input:focus, textarea:focus {
+	        border-color: #C9C9C9;
+	        box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
+	        -moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;
+	        -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 8px;	
+        }
+
+        .form label {
+	        margin-left: 10px;
+	        color: #999999;
+        }
+
+        /* ===========================
+           ====== Submit Button ====== 
+           =========================== */
+
+        .submit input {
+	        width: 100px; 
+	        height: 40px;
+	        background-color: #474E69; 
+	        color: #FFF;
+	        border-radius: 3px;
+	        -moz-border-radius: 3px;
+	        -webkit-border-radius: 3px;		
+        }
+
+/*===========================
+  ==== CONTAINER BOTTOM ===== 
+  =========================== */
+#container-bottom {
+    width: 100%;
+    text-align: center;   
+}
+    .flags {
+        margin-top: 0px;        
+        display: inline-block;
+    }
+        ul {   
+            width: 100%;
+            list-style-type: none;
+        }
+
+        li {
+            float: left;   
+            margin: 0.25em;  
+        }
+
+
+/*ADJUST SEARCH SECTION TO RESPONSIVE-------------------------------------------------------*/
+@media screen and (min-width : 500px) and (max-width:650px) {
+    .wrapper-left {
+        width: 25%;
+    }
+
+    .wrapper-right {
+        width: 25%;
+    }
+}
+
+@media screen and (min-width : 400px) and (max-width:500px) {
+    .wrapper-left {
+        margin-left: -2%;
+        padding: 1.5em;
+        /*border: 2px solid #808080;*/
+    }
+
+    .wrapper-right {
+        margin-right: 4%;
+        padding: 1.5em;
+    }
+}
+
+@media screen and (min-width : 150px) and (max-width:400px) {
+    .wrapper-left {
+        width: 100%;
+        margin-left: 25%;
+        float: none;
+        /*border: 2px solid #808080;*/
+    }
+
+    .wrapper-right {
+        width: 100%;
+        margin-left: 25%;
+        margin-top: -20%;
+        float: none;
+    }
+
+    #container-bottom {
+ 
+    }
+        li {
+float: none;
+        }
+}

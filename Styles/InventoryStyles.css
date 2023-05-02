@@ -1,0 +1,219 @@
+body, html{
+  margin:0;
+  padding:0;
+
+}
+
+/*SEARCH SECTION--------------------------------------------------------------------------*/
+.search-bar {
+    width: 100%;
+    height: 30px;
+    background-color: #687bd4;
+    margin-top: 105px;
+    position: fixed;    
+    text-align: center;
+    /*border: 2px solid #808080;*/
+}
+    .mode-title {
+        float: left;
+        margin-top: 5px;
+        margin-left: 2em;
+        vertical-align: central;
+        font-family:    'Palatino Linotype' "Book Antiqua", Palatino, serif;
+        color: white;
+    }
+    .modeSelect {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+    }
+    .tipo-title {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+        font-family:    'Palatino Linotype' "Book Antiqua", Palatino, serif;
+        color: white;
+    }
+    .tipoSelect {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+    }
+    .area-title {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+        font-family:    'Palatino Linotype' "Book Antiqua", Palatino, serif;
+        color: white;
+    }
+    .areaSelect {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+    }
+    .order-title {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+        font-family:    'Palatino Linotype' "Book Antiqua", Palatino, serif;
+        color: white;
+    }
+    .orderSelect {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+    }
+    #searchButton {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+    }
+
+/*PROPERTY RESULTS SECTION--------------------------------------------------------------------------*/
+#wrapper {
+    width:          100%;
+    overflow:       hidden;
+
+}
+#container {
+    max-width:      100%;
+    margin-left:    1em;
+    margin-right:   1em;
+    margin-top:     138px;
+}
+
+.property-grid {
+    margin: 1em 0.1em;
+	max-width: 1200px;
+    margin-left: 2%;
+}
+
+.property-grid li {
+    border: 2px solid #808080;
+    padding: 2%;
+    width: 20%;
+    height: auto;
+    display: inline-block;
+    box-shadow:     0 5px 5px 0 #bce;
+    margin: .1em;
+}
+
+.property-grid li:hover {
+
+}
+
+.property-title {
+   height: 2em;
+   font-family:    'Palatino Linotype' "Book Antiqua", Palatino, serif;
+   font-weight: bold;
+   font-size: 1.75em;
+   color: #425fd0;
+}
+
+.property-image img {
+    width: 100%;
+    /*max-height: 135px;*/
+    padding-top: 1em;
+}
+
+.property-upper-container {
+    margin-top: 1em;    
+}
+
+.property-info-left {
+    float: left;
+    width: 60%;
+}
+
+.property-area {
+    font-family:    'Palatino Linotype' "Book Antiqua", Palatino, serif;
+    font-size: 1.5em;
+    height: 3.75em;
+    width: 70%
+}
+
+.button-detalles {
+  display: table;
+  background-color: #4CAF50;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 16px;
+  padding: 8px;
+  width: 40%;
+  transition: all 0.5s;
+  cursor: pointer;
+  vertical-align: central;
+  float: left;
+  text-decoration: none;
+  box-shadow:     0 5px 5px 0 #bce;
+}
+
+.property-price {
+    font-family:    'Palatino Linotype' "Book Antiqua", Palatino, serif;
+    font-size: 1.25em;
+    height: 1.5em;
+}
+
+.property-lower-container {
+    margin-top: 5em; 
+}
+
+table {
+    border: none;
+    margin-left: 5%;
+    width: 90%;
+}
+
+td {
+    vertical-align: central;
+    border: none;
+
+}
+
+tr {
+
+}
+
+/*ADJUST SEARCH SECTION TO RESPONSIVE--------------------------------------------------------------*/
+
+@media screen and (min-width : 650px) and (max-width:1000px) {
+   
+    /*PROPERTY GRID SECTION--------------------------------------------------------------*/
+    .property-grid {
+        margin-top: 165px;
+        margin-left: 0%;
+    }  
+    .property-grid li {
+        padding: 2%;
+        width: 40%;
+        margin: .1em;
+    }
+
+    .property-title {
+       font-size: 1.5em;
+    }
+}
+
+/*ADJUST SEARCH SECTION TO RESPONSIVE SMALLER-------------------------------------------------------*/
+@media screen and (min-width : 150px) and (max-width:650px) {
+
+    /*PROPERTY GRID*/
+    .property-grid {
+        margin-top: 165px;
+    }  
+    .property-grid li {
+        padding: 2%;
+        width: 100%;
+        height: auto;
+        display: inline-block;
+        box-shadow: 0 5px 5px 0 #bce;
+        margin: .1em;
+        margin-left: -5%;
+    }
+
+    .property-title {
+       font-size: 1.5em;
+
+    }
+}

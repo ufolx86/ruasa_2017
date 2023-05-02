@@ -1,0 +1,173 @@
+body, html{
+      margin:0;
+      padding:0;
+      font-family:    'Palatino Linotype';
+}
+
+/*PROPERTY RESULTS SECTION--------------------------------------------------------------------------*/
+#wrapper {
+    width:          100%;
+    overflow:       hidden;
+
+}
+#container {
+    max-width:      100%;
+    margin-left:    1em;
+    margin-right:   1em;
+    margin-top:     138px;
+}
+
+.property-grid {
+    margin: 1em 0.1em;
+	max-width: 1200px;
+    margin-top: 120px;
+    margin-left: 2%;
+}
+
+.property-grid li {
+    border: 2px solid #808080;
+    padding: 2%;
+    width: 90%;
+    height: auto;
+    display: inline-block;
+    box-shadow:     0 5px 5px 0 #bce;
+    margin: .1em;
+}
+
+.property-grid li:hover {
+
+}
+/*WRAPPER LEFT--------------------------------------------------------------------------*/
+.wrapper-left {
+    float: left;
+    width: 30%;
+    margin: 1em;
+}
+    .property-image img{
+        width: 100%;        
+        padding-top: 1em;
+    }
+
+/*WRAPPER MIDDLE--------------------------------------------------------------------------*/
+.wrapper-middle {
+    float: left;
+    width: 30%;
+    margin: 1em;
+}
+
+    .property-title {
+       width: 100%;
+       font-weight: bold;
+       font-size: 1.75em;
+       color: #425fd0;
+    }
+
+    .property-area {
+        width: 100%;
+        font-size: 1.5em;
+        height: 1.5em;
+    }
+
+    .property-price {
+        width: 100%;
+        font-size: 1.25em;
+        height: 1.5em;
+    }
+
+    .property-description {
+    
+    }
+
+    .property-observations {
+    
+    }
+
+    .property-builtm2 {
+    
+    }
+
+    .property-landm2 {
+    
+    }
+
+/*WRAPPER RIGHT--------------------------------------------------------------------------*/
+.wrapper-right {
+    float: left;
+    width: 20%;
+    margin: 1em;
+}
+
+    .button-detalles {
+        width: 100%;
+        display: table;
+        background-color: #4CAF50;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 16px;
+        padding: 8px;        
+        transition: all 0.5s;
+        cursor: pointer;
+        vertical-align: central;
+        margin: 1em;
+        text-decoration: none;
+        box-shadow:     0 5px 5px 0 #bce;
+    }
+    .button-editar {
+        width: 100%;
+        display: table;
+        background-color: #4CAF50;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 16px;
+        padding: 8px;
+        transition: all 0.5s;
+        cursor: pointer;
+        vertical-align: central;
+        margin: 1em;
+        text-decoration: none;
+        box-shadow:     0 5px 5px 0 #bce;
+    }
+    .button-photos {
+        width: 100%;
+        display: table;
+        background-color: #4CAF50;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 16px;
+        padding: 8px;
+        transition: all 0.5s;
+        cursor: pointer;
+        vertical-align: central;
+        margin: 1em;
+        text-decoration: none;
+        box-shadow:     0 5px 5px 0 #bce;
+    }
+    .button-eliminar {
+        width: 100%;
+        display: table;
+        background-color: red;
+        border: none;
+        color: #FFFFFF;
+        text-align: center;
+        font-size: 16px;
+        padding: 8px;
+        transition: all 0.5s;
+        cursor: pointer;
+        vertical-align: central;
+        margin: 1em;
+        text-decoration: none;
+        box-shadow:     0 5px 5px 0 #bce;
+    }
+
+/*ADJUST INVENTORY SECTION TO RESPONSIVE-----------------------------------------------------------*/
+@media screen and (min-width : 650px) and (max-width:1000px) {
+
+}
+
+/*ADJUST INVENTORY SECTION TO RESPONSIVE SMALLER----------------------------------------------------*/
+@media screen and (min-width : 150px) and (max-width:650px) {
+
+}

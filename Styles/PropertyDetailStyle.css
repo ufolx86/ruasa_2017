@@ -1,0 +1,154 @@
+body {
+  margin:0;
+  padding:0;
+  overflow-x: hidden;
+  font-family:    'Palatino Linotype';
+}
+
+body, html {
+  margin:0;
+  padding:0;    
+}
+
+h1 {
+    font-size: 1.5em;
+    color: #425fd0; 
+
+}
+
+#wrapper {
+    width:      100%;
+    overflow:   hidden;
+
+}
+#container {
+    margin:     2em;
+    margin-top: 120px;
+}
+
+/*WRAPPER INFO SECTION--------------------------------------------------------------*/
+#tipo-modo {
+    width:          100%;
+    margin-top:     -1em;
+    text-align:     center;
+    text-justify:   inter-word; 
+    font-size: 2em;
+    font-weight: bold;  
+}
+
+#price {
+    width:          100%;
+    text-align:     center;
+    text-justify:   inter-word; 
+    margin-top: -.85em;
+    font-size: 2em;
+    font-weight: bold;  
+    color: #4CAF50; 
+}
+.wrapper-info {
+    margin:     2em;  
+    border:     2px solid #808080;   
+}
+
+    #description-container {
+        margin: 2em;
+    }
+
+        #description-title {
+            width: 100%;
+            text-align:     center;
+            font-weight: bold;
+           /*float: right;*/
+        }
+
+        #description-info {
+            font-size: 1em;
+            font-weight: bold;
+            text-justify: inter-word;
+            text-align:     center;
+            /*float: right;*/
+        }
+
+    #detail-container {
+        margin: 2em;
+    }
+        #detail-title {
+            width: 100%;
+            text-align:     center;
+           /*float: right;*/
+        }       
+    #area-container {
+        margin: 2em;
+    }
+
+        #area-title {
+            width: 100%;
+            text-align:     center;
+           /*float: right;*/
+        }
+
+        .detail-column ul{
+            list-style: none;
+            margin-left: -25px;
+        }
+        .detail-row {
+            overflow:hidden; /*make sure the wrapper has no dimension*/
+            /*background:red;*/
+            margin-bottom:10px;
+        }
+        .detail-column {
+            float:left; 
+            width:30%;
+            height: 110px;
+            /*background:blue;*/
+            margin:10px;
+        }
+
+th {
+    text-align: left;
+}
+
+td {
+    vertical-align: central;
+}
+
+th, td {
+    padding: 15px;
+}
+
+/*ADJUST SECTION TO RESPONSIVE 600-800--------------------------------------------------------------*/
+@media screen and (min-width : 600px) and (max-width:800px) {
+
+    .detail-column {
+        width:45%;
+        height: 110px;
+    }
+
+    .wrapper-detail-center {
+        
+    }
+
+    .wrapper-detail-right {
+        margin-top: -18%;
+    }
+}
+
+/*ADJUST SECTION TO RESPONSIVE 150-600--------------------------------------------------------------*/
+@media screen and (min-width : 150px) and (max-width:600px) {
+
+    .detail-column {
+        width:90%;
+        height: 110px;
+    }
+    .wrapper-detail-center {
+        margin-top: -10%;
+    }
+
+    .wrapper-detail-right {
+        margin-top: -30%;
+    }
+
+    .hr-line {
+        margin-top: -35%;
+    }
+}

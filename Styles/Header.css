@@ -1,0 +1,154 @@
+.header-wrapper {
+    background-color: white;
+    width: 100%;
+    height: 105px;
+    position: fixed;
+
+    z-index: 200;
+    font-family:    'Palatino Linotype';
+}
+/*LOGO SECTION------------------------------------------------------------------------*/
+.float-left {
+    
+    float: left;
+    height: 100%;
+}
+    .site-logo img {
+        width: 150.16px;
+        height: 90.48px;
+        margin: -65px 40px;
+
+    }
+
+.float-right {
+    float: right;
+    margin-top: 5px;
+}
+
+
+/*ADMIN SECTION------------------------------------------------------------------------*/
+#upper-left-section {
+    text-align: right;  
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+    #upper-left-section a {
+        display: inline-block;
+    }
+
+    .email {
+        float: right;
+    }
+
+    #logoutForm {
+        float: right;
+        background-color: red;
+        padding: 5px;
+        color: white;
+        border-radius: 5px;
+        font-size: 0.8em;
+    }
+
+    .login-button {
+        height: 1em;
+        background-color: #4CAF50;
+        padding: 8px;
+        color: white;
+        border-radius: 5px;
+    }
+
+/*NAV SECTION------------------------------------------------------------------------*/
+.lower-left-section {
+    margin-top: 33px;
+    line-height: 20%;
+    margin-right: 10px;
+}
+
+.lower-left-section li {
+    display:        inline-block;
+    font-weight:    bold;
+    font-size:      80%;
+    list-style-type: none;
+    text-align: center;
+}
+
+.lower-left-section a {
+    text-decoration: none;
+    background-color: #687bd4;
+    color: white;
+    padding: 14px 16px;
+    border-radius: 5px;
+}
+.lower-left-section li a {
+    transition: 0.3s;
+}
+
+.lower-left-section li a:hover:not(.active) {
+    background-color: #1e39a3;
+}
+
+ul.lower-left-section li.icon {
+    display: none;
+    margin-top: 3px; 
+}
+
+.active {
+    /*background-color: #4CAF50;*/
+}
+
+/* When the screen is less than 680 pixels wide, hide all list items, except for the first one ("Home"). Show the list item that contains the link to open and close the topnav (li.icon) */
+@media screen and (max-width:980px) {
+    .float-left {    
+        width: 175px;
+    }
+    ul.lower-left-section li:not(:first-child) {display: none;}
+    ul.lower-left-section li.icon {
+        float: right;
+        display: inline-block;
+    }
+    .site-logo img {
+        margin: -65px 15px;
+    }    
+}
+
+/* When the screen is less than 600 pixels wide, hide all list items, except for the first one ("Home"). Show the list item that contains the link to open and close the topnav (li.icon) */
+@media screen and (max-width:600px) {
+    .float-left {    
+        width: 130px;
+    }
+        .site-logo img {
+            width: 125px;
+            height: 75px;
+            margin: -10px 10px;
+        }
+
+    .header-wrapper {
+        position: absolute;
+    }   
+}
+
+/* The "responsive" class is added to the topnav with JavaScript when the user clicks on the icon. This class makes the topnav look good on small screens */
+@media screen and (max-width:1000px) {
+  ul.lower-left-section.responsive {position: relative;}
+  ul.lower-left-section.responsive li.icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  ul.lower-left-section.responsive li {
+    float: none;
+    display: inline;
+  }
+  ul.lower-left-section.responsive li a {
+    display: block;
+    text-align: left;
+    background-color: #687bd4;
+  }
+  .lower-left-section a {
+    border-radius: 5px;
+  } 
+    .icon {
+        margin: .5em;
+    }
+}

@@ -1,0 +1,132 @@
+/*SEARCH SECTION--------------------------------------------------------------------------*/
+.search-bar {
+    width: 100%;
+    height: 30px;
+    background-color: #687bd4;
+    margin-top: 105px;
+    position: fixed;    
+    text-align: center;
+    /*border: 2px solid #808080;*/
+}
+    .mode-title {
+        float: left;
+        margin-top: 5px;
+        margin-left: 2em;
+        vertical-align: central;
+        font-family:    'Palatino Linotype' "Book Antiqua", Palatino, serif;
+        color: white;
+    }
+    .modeSelect {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+    }
+    .tipo-title {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+        font-family:    'Palatino Linotype' "Book Antiqua", Palatino, serif;
+        color: white;
+    }
+    .tipoSelect {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+    }
+    .area-title {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+        font-family:    'Palatino Linotype' "Book Antiqua", Palatino, serif;
+        color: white;
+    }
+    .areaSelect {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+    }
+    .order-title {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+        font-family:    'Palatino Linotype' "Book Antiqua", Palatino, serif;
+        color: white;
+    }
+    .orderSelect {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+    }
+    #searchButton {
+        float: left;
+        margin-top: 5px;
+        margin-left: 1em;
+    }
+
+/*ADJUST SEARCH SECTION TO RESPONSIVE--------------------------------------------------------------*/
+@media screen and (min-width : 650px) and (max-width:810px) {
+    
+    .first-batch {
+        float: left;
+    }
+    .second-batch {
+        margin-top: -12.5px;
+        margin-left: -15px;
+        float: left;
+    }
+    .search-bar {
+        height: 55px;
+    }
+    
+}
+/*ADJUST SEARCH SECTION TO RESPONSIVE SMALLER-------------------------------------------------------*/
+@media screen and (min-width : 150px) and (max-width:600px) {
+    .first-batch {
+        float: left;
+    }
+    .second-batch {
+        margin-top: -12.5px;
+        margin-left: -15px;
+        float: left;
+    }
+    .search-bar {
+        height: 55px;
+        position: absolute;
+    }
+
+    .area-title {
+        width: 10%;
+        margin-left: 2.5%;
+        margin-right: 5%;
+    }
+    .areaSelect {
+        width: 20%;
+    }
+
+    .tipo-title {
+        width: 10%;
+    }
+    .tipoSelect {
+        width: 20%;
+    }
+
+/*SECOND COLUMN*/
+    .mode-title {
+        margin-left: 6%;
+        width: 10%;
+    }
+    .modeSelect {
+        width: 18%;
+    }    
+    .order-title {
+        width: 15%;
+        margin-left: 2%;
+    }
+    .orderSelect {
+        width: 18%;
+    }
+    #searchButton {
+        margin-left: 2%;
+        width: 18%;
+    }
+}
