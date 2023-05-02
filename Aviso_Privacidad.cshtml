@@ -1,0 +1,78 @@
+﻿@{
+    
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>RUASA - Relocation</title>
+        <link rel="stylesheet" type="text/css" href="Styles/NavBar.css">
+        <link rel="stylesheet" type="text/css" href="Styles/RelocationStyles.css">
+        <style>
+            aviso-text {text-justify: auto;
+            width: 100%}
+        </style>
+    </head>
+    <body>
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Header.cshtml")    
+        
+        <!--TOPICS SECTION-------------------------------------------------------------------------->
+        <div id="reloc-topics">
+            <div id="wrapper">
+                <div id="container">
+                    <ul class="relocation-offer">
+                        <li id="offer">
+                            <!--WRAPPER LEFT---------------------------------------------------------------->
+                            <!--<div id="wrapper-left">
+                                <div id="offer-image">
+                                    <img src="~/Resources/Relocation/settling.jpg" alt="n/a"></img>
+                                </div>
+                            </div>-->
+                            <!--WRAPPER MIDDLE-------------------------------------------------------------->
+                            <div id="wrapper-middle">
+                                <div id="offer-title">
+                                    <h1>Aviso de Privacidad</h1>
+                                </div>
+                                <hr>
+                                <p class="aviso-text">
+                                    En cumplimiento a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares, Víctor Manuel
+Ramírez Reyes, utilizando para los efectos de este aviso bajo el nombre comercial de “RUASA, Bienes Raíces”, está
+consciente de que la seguridad de su información personal para el uso de nuestros servicios es importante, tomando
+seriamente la protección de toda la documentación que proporcione para llevar a cabo algún trámite relacionado con la
+actividad inmobiliaria. Con este aviso de privacidad, me gustaría informarle acerca de cuáles son las medidas de
+seguridad que se toman para su protección.
+Recolección de Datos. Toda la información que nuestros clientes es tratada de forma estrictamente confidencial por lo
+que al proporcionar sus datos personales, tales como: Nombre o razón social, dirección, documentación de inmuebles,
+RFC, CURP, actas de nacimiento, actas de matrimonio, comprobantes de ingresos, estados de cuenta bancarios,
+referencias personales y demás documentación que usted proporciones para llevar a cabo una negociación relacionada con
+inmuebles.
+Los datos personales se reúnen exclusivamente si usted nos los proporciona, es decir, como parte del registro a través del
+llenado de formas o correos electrónicos, como parte de una solicitud de servicios o de consultas, conservándose en una
+base de datos o en archivos físicos. Dichos datos personales no son proporcionados por nosotros para el uso de terceros en
+ninguna forma, a menos que hayamos obtenido su consentimiento o autorización para hacerlo.
+Mantendremos el control de y la responsabilidad del uso de cualquier información personal que usted nos proporcione.
+
+Propósitos de su uso. La información que nosotros recopilamos se utilizará únicamente con el propósito de
+proporcionarle los servicios o productos que solicitó, para fines de propaganda y promoción de los productos y servicios
+de RUASA, Bienes Raíces o para otros propósitos para los cuales usted dio su consentimiento, salvo disposición de la Ley
+o Autoridades en contrario.
+
+Derecho de Acceso y Corrección. Usted tiene los derechos (ARCO) de acceder a sus datos, solicitar la rectificación de
+datos erróneos o incompletos, cancelar u oponerse al uso que les demos, siempre y cuando se ajuste a lo estipulado en la
+Ley, dando aviso a “RUASA, Bienes Raíces” A LOS Tels. 2282875 y 2352010. Caso contrario, se da por entendido que
+usted otorga su consentimiento al uso de sus datos personales, en la forma que ha quedado establecida en el presente
+Aviso de Privacidad.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--FOOTER SECTION-------------------------------------------------------------------------->
+        @RenderPage("Footer.cshtml")
+    </body>
+</html>

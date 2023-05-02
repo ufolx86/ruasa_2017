@@ -1,0 +1,72 @@
+﻿@{
+
+
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RUASA - Contact</title> 
+        <link rel="stylesheet" type="text/css" href="Styles/NavBar.css">
+        <link rel="stylesheet" type="text/css" href="Styles/ContactStyles.css">
+    </head>
+    <body>
+        <!--HEADER SECTION-------------------------------------------------------------------------->
+        @RenderPage("~/Header_EN.cshtml")
+        <div>
+            <div id="wrapper">            
+                <div id="container">
+                    <div id="container-top">
+                        <h1>Telephones</h1>
+                        <div class="wrapper-left">                            
+                            <h3>Office:</h3>
+                            <h3>(442) 228-28-75</h3>
+                            <h3>(442) 235-20-10</h3>
+                        </div>
+                        <div class="wrapper-right">
+                            <h3>Agents:</h3>
+                            <h3>(442) 330-43-80</h3>
+                            <h3>(442) 149-85-81</h3>
+                            <h3>(442) 130-75-33</h3>
+                            <h3>(442) 160-92-59</h3>
+                            <!--<h1>Correo</h1>
+                            <form id="contact-form" method="post" action="MailSent.php">
+                                <label for="name">Nombre:</label>
+                                <p class="name">
+			                        <input type="text" name="name" id="name" placeholder="Su Nombre" />
+		                        </p>
+		                        <label for="email">Correo:</label>
+		                        <p class="email2">
+                                    
+			                        <input type="text" name="email" id="email" placeholder="mail@ejemplo.com" />
+		                        </p>		
+	                            Mensaje:
+		                        <p class="text">
+			                        <textarea name="request" placeholder="Escriba algo aquí." /></textarea>
+		                        </p>
+		
+		                        <p class="submit">
+			                        <input type="submit" value="Enviar" />
+		                        </p>
+                                <h3>O bien escribir a contacto@@ruasabienesraices.com</h3>
+                            </form>-->
+                        </div>
+                    </div>
+                    <div id="container-bottom">
+                        <div class="flags">
+                            <ul class="flags-list">
+                                <li><img src="~/Resources/Flags/mex.png" alt="mexico" width="60" height="40"></li>
+                                <li><img src="~/Resources/Flags/spain.png" alt="spain" width="60" height="40"></li>
+                                <li><img src="~/Resources/Flags/england.png" alt="england" width="60" height="40"></li>
+                                <li><img src="~/Resources/Flags/us.png" alt="us" width="60" height="40"></li>
+                                <li><img src="~/Resources/Flags/france.png" alt="france" width="60" height="40"></li>
+                            </ul>                                                         
+                        </div>
+                    </div>                                       
+                </div>            
+            </div>
+        </div>        
+        <!--FOOTER SECTION-------------------------------------------------------------------------->
+        @RenderPage("Footer.cshtml")
+    </body>
+</html>
